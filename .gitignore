@@ -1,0 +1,8 @@
+*.bbl
+*.aux
+*.blg
+*.log
+*.pdf
+*.fls
+*.fdb_latexmk
+!IEEEtran_HOWTO.pdf
