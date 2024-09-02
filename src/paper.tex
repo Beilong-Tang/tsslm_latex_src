@@ -67,12 +67,13 @@ target speaker extraction, speech separation, language models, audio discretizat
 \end{IEEEkeywords}
 
 \section{Introduction}
-Speech separation, the so-called cocktail party problem \cite{cocktail}, focuses on separating each individual speaker's source from a mixture with multiple speakers.
+Speech separation, the so-called cocktail party problem \cite{cocktail}, focuses on separating each individual speaker's source from a mixture with multiple speakers. This task is easy for humans but not for computers. 
 In real life, speech signals are usually companied with background noise or other speakers' speeches. 
-Our humans might grasp the speech but machine is not the case.
-These signals may not be optimal for tasks like speaker verification. 
-Target speaker extraction is a sub-task of speech separation. 
+These corrupted signals may not be optimal for tasks like speaker verification \cite{rao2019targetspeakerextractionoverlapped,9414017}, and speech recognition \cite{molkov2017SpeakerAwareNN, 8462661}, emphasizing the importance of this task.
 
+Unlike blind speech separation, which focuses on separating each utterance from a mixture 
+of known speakers, target speaker extraction aims at only extracting the 
+target speaker's voice given another auxiliary information of the target speaker. The separation
 
 
 \subsection{Units}
