@@ -7,3 +7,5 @@
 2. Discriminative Model
 
 3. Generative Model 
+
+4. SSL-Model
