@@ -13,7 +13,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Exploration in Target Speaker Extraction using Discrete Tokens and Language Models\\
+\title{Exploration in Target Speaker Extraction using Discrete Representations 
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
@@ -73,8 +73,11 @@ These corrupted signals may not be optimal for tasks like speaker verification \
 
 Unlike blind speech separation, which focuses on separating each utterance from a mixture 
 of known speakers, target speaker extraction aims at only extracting the 
-target speaker's voice given another auxiliary information of the target speaker. The separation
-
+target speaker's voice given another auxiliary information of the target speaker. Due to the 
+development of Deep Neural Network (DNN), many models nowadays are discriminative models. They 
+utilize a masking strategy to minimize the distance between the clean speech and estimated 
+speech directly \cite{luo2019conv,spex_plus,sepformer,sef_net}. However, these discriminative 
+models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. 
 
 \subsection{Units}
 \begin{itemize}
