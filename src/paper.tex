@@ -91,8 +91,14 @@ typically captures the acoustic features of the audio \cite{speech_tokenizer}. T
 utilizes  self-supervised Learning (SSL) models like HuBERT \cite{hubert} and WavLM \cite{wavlm}.
 SSL models have demonstrated 
 excellent performances on many downstream tasks \cite{superb}. These SSL models extract  
-continuous representations containing rich semantic and timbre information of a given speech. 
-In this paper, we mainly explore how far we can go 
+continuous representations containing rich semantic and timbre information from a given speech. 
+As demonstrated in \cite{dasb}, SSL models perform better than audio codec in tasks like speech 
+enhancement and speech separation. Therefore, in this 
+paper, we mainly explore the discretization of SSL models.  
+
+Discretization methods have been studied for speech enhancement \cite{selm} and blind speech separation \cite{dasb}, however, this approach has been rarely for target speaker extraction. TokenSplit \cite{tokensplit} needs the transcript of the speech to achieve satisfying results. In 
+real life, however, speech is rarely provided with its transcript. 
+
 
 \subsection{Units}
 \begin{itemize}
