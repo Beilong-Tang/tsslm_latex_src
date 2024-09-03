@@ -13,7 +13,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Exploration in Target Speaker Extraction using Discrete Representations 
+\title{Exploration in Target Speaker Extraction using Discrete Representations and Language Models
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
@@ -77,12 +77,14 @@ target speaker's voice given another auxiliary information of the target speaker
 development of Deep Neural Network (DNN), many models nowadays are discriminative models. They 
 utilize a masking strategy to minimize the distance between the clean speech and estimated 
 speech directly \cite{luo2019conv,spex_plus,sepformer,sef_net}. However, these discriminative 
-models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. To solve these issues, researchers have proposed generative models. This method aims to learn the underlying distribution of the target speaker’s voice and use this knowledge to generate the clean speech of the target speaker from a mixture of voices rather 
+models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. To solve these issues, researchers have proposed generative models. This method aims to learn the underlying distribution of the target speaker's voice and use this knowledge to generate the clean speech of the target speaker from a mixture of voices rather 
 than directly mapping from mixed speech to clean speech. Some generative models, like diffusion
 models \cite{target_diff} and variational autoencoders (VAE) \cite{vae} have been studied. It has been demonstrated that generative models can achieve results comparable to those of discriminative models \cite{target_diff,tokensplit}.
 
-Recently, self-supervised Learning (SSL) models like HuBERT \cite{} and WavLM \cite{wavlm} have demonstrated
-excellent performances on many downstream tasks like blind speech separation, 
+Recently, self-supervised Learning (SSL) models like HuBERT \cite{hubert} and WavLM \cite{wavlm} have demonstrated
+excellent performances on many downstream tasks \cite{superb}. These SSL models extract  
+continuous representations containing rich semantic and timbre information of a given speech. 
+
 
 \subsection{Units}
 \begin{itemize}
