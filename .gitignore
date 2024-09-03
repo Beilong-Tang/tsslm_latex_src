@@ -7,3 +7,6 @@
 *.fdb_latexmk
 !IEEEtran_HOWTO.pdf
 *.gz
+*.wav
+test/
+!src/assets/*.pdf
