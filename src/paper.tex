@@ -104,12 +104,20 @@ however, this approach has
 been rarely studied for target speaker extraction. In this paper, we present a novel way to do 
 target speaker extraction using discrete tokens and LMs. Inspired by the blind speech separation 
 networks proposed in DASB \cite{dasb}, our model has three stages: encoding, modeling and decoding.
-For the encoding stage, our model 
-
+For the encoding stage, reference speech and mixed speech are tokenized using WavLM and 
+Kmeans as tokenizer. Unlike SELM \cite{selm}, which uses the 6th layer of wavlm as input, 
+we follow the recipes in \cite{dasb} and uses the output from hidden 
+layers 1, 3, 7, 12, 18, 23. Our results indicate that using 6 layers as input is better 
+than using only the 6th layer. 
+For the decoding stage, we used the pretrained unit hifi-gan 
+in \cite{unit_hifi} to reconstruct the 
+discrete tokens back to audio. 
+\cite{dasb}. 
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth]{assets/model.pdf}
 \caption{model}
+\label{model}
 \end{figure*}
 
 \subsection{Units}
