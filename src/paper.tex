@@ -111,7 +111,13 @@ layers 1, 3, 7, 12, 18, 23 of WavLM as input to the Kmeans layer. 6 Kmeans model
 are trained and applied on each layer output respectively. 
 Our results indicate that using multiple layers as 
 input is better 
-than using only the 6th layer. 
+than using only the 6th layer. The reference speech is fed to the encoder directly. 
+However, for the mixed speech, instead of directly passing it to the WavLM model, we first concatenated the reference speech on both sides 
+of it before passing. After tokenization, we use only the tokens 
+corresponding to the mixed speech. For the modeling stage, we utilized an attention 
+embedding mechanism to add each embeddings of all layers together. We used a Cross 
+Attention mechanism similar in \cite{sef_net} to inject the speaker information. 
+An encoder-only LM is applied to 
 
 
 For the decoding stage, we used the pretrained unit HiFi-GAN 
