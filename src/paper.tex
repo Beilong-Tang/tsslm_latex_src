@@ -209,7 +209,8 @@ embedding layer, a cross-multiple head attention module,
 and a FiLM module. 
 We use \(E_m\) as query and \(E_r\) as key and value for 
 the attention module. The output of the cross-multiple head attention module \(E_{spk}\)
-is passed together with \(E_m\) to get the final output of the module. 
+is passed together with \(E_m\) to the feature-wise linear modulation (FiLM) get the final output of the module. The output of 
+FiLM is denoted as 
 
 
 \subsection{Units}
