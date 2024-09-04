@@ -156,7 +156,7 @@ embedding dimension, specifically 1024 in WavLM Large. The Kmeans tokenizer uses
 separately on each output layer. Each model uses the same clustering number denoted by \(K\).
 After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a tensor \(\bm{d}\) of shape \(n \times T\) where each value \(\bm{d}_{(n_i,t)} \in (0, K-1), n_i \in (0,n), t \in 
 (0, T)\). We choose \(K\) to be 1000 in our experiments. For reference speech and mixed speech, we 
-use the same Kmeans model and the same layer output of WavLM. 
+use the same Kmeans model and the same layer output of WavLM. The encoder is freezed during training.
 
 The encoding strategy on the mixed speech plays a pivotal role in the model performance. Assume we 
 have a reference speech \(s_r \in R^{T^r} \) and mixed speech \(s \in R^{T'}\). 
@@ -169,7 +169,15 @@ as input for the encoder, obtaining output \(\bm{d'}\) of shape \(n \times (T_r+
 denotes the length of output by directly passing the mixed speech without concatenation. \(\bm{d'}\) 
 contains the discrete tokens for two pieces of the same reference speech and one piece of the mixed 
 speech, we select tensor \(\bm{d}\) belonging only to the mixed speech of shape \(n\times T\) as the 
-encoder output. 
+encoder output. This process is inspired by the training schema of WavLM \cite{wavlm}. To ensure the 
+model correctly outputs rich information of the target speaker, it is trained by 
+having a clean speech overlapped with another interference less than 50\% of the length of the clean 
+speech and using the first utterance as the main speaker. By this way, the model identifiers the 
+main speaker and produces embedding focusing on the main speaker. Our later experiments showed that 
+this strategy plays an important role in the model performance. 
+
+\subsection{Modeling}
+
 
 \subsection{Units}
 \begin{itemize}
