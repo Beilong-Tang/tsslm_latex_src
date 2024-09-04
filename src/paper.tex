@@ -130,6 +130,16 @@ using discrete tokens to conduct target speaker extraction.
 \end{figure*}
 
 \section{Method}
+Our model consists of three stages: encoding, modeling, and decoding. The encoder and decoder are 
+pretrained models freezed during training. For the encoding stage, we use multiple layers of WavLM 
+and publicly available Kmeans 
+models in \cite{dasb} to produce the discretized tokens. We use a special concatenation 
+strategy to encode the mixture speech. For decoders, we use the scalable HiFi-GAN available in 
+\cite{dasb} to reconstruct the audio from discretized tokens. Our main focus is on the
+modeling stage. We apply an attention embedding mechanism to embed discrete tokens from different 
+layers into one single embedding. Encoder-only LM and linear classifier is applied afterwards to optimize the likelihood of probability 
+distribution of the clean tokens. 
+
 
 \subsection{Encoding}
 We use pretrained SSL model WavLM Large \cite{wavlm} to 
@@ -208,7 +218,9 @@ distribution of each layer respectively.
 Cross-entropy loss is applied between 
 the output tokens and the clean tokens through discretizing the 
 ground truth clean audio . 
-\subsection{Decoding}
+
+
+
 
 \subsection{Units}
 \begin{itemize}
