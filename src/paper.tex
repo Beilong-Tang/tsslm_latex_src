@@ -190,7 +190,16 @@ After obtaining the discrete tensor \(\bm{d}\) with shape \(n\times T\), we use 
 learnable embedding tables each with \(K\) entires to embed the 6 layers 
 respectively, each resulting in a tensor of shape \(T \times E\). 
 After embedding, we follow the same recipe as in \cite{dasb} to 
-aggregate the tensor by using attention mechanism to sum all the 6 tensors. 
+aggregate the tensor by using attention mechanism to sum all the 6 tensors. This summation 
+keeps the information of each layer while reducing the system complexity by reducing the 
+dimension of layers. 
+
+\subsubsection{Cross Attention}
+The key factor in target speaker extraction is to inject the information of target speaker 
+into the mixture. SEF-Net \cite{sef_net} has proposed an embedding free way to inject the 
+target speaker information into the mixture by using cross attention module. This approach 
+has 
+
 
 \subsection{Units}
 \begin{itemize}
