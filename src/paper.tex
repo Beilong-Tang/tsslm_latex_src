@@ -185,8 +185,12 @@ this strategy plays an important role in the model performance.
 \caption{Overview of TSELM.}
 \label{cross_attention}
 \end{figure}
-\subsection{Attention Embedding}
-
+\subsubsection{Attention Embedding}
+After obtaining the discrete tensor \(\bm{d}\) with shape \(n\times T\), we use 6
+learnable embedding tables each with \(K\) entires to embed the 6 layers 
+respectively, each resulting in a tensor of shape \(T \times E\). 
+After embedding, we follow the same recipe as in \cite{dasb} to 
+aggregate the tensor by using attention mechanism to sum all the 6 tensors. 
 
 \subsection{Units}
 \begin{itemize}
