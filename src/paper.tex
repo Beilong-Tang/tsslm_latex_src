@@ -166,7 +166,10 @@ reference speech to get tensor \(\bm{d_r}\) of shape \(n \times T_r\). But for t
 speech, instead of directly following the procedure, we first concatenate it with 
 the reference speech to get \(s' = [s_r, s_m, s_r] \in R^{(T^r+T'+T^r)}\). Then we use this speech 
 as input for the encoder, obtaining output \(\bm{d'}\) of shape \(n \times (T_r+T+T_r)\) where \(T\) 
-denotes the length of output by directly passing the mixed speech without concatenation. 
+denotes the length of output by directly passing the mixed speech without concatenation. \(\bm{d'}\) 
+contains the discrete tokens for two pieces of the same reference speech and one piece of the mixed 
+speech, we select tensor \(\bm{d}\) belonging only to the mixed speech of shape \(n\times T\) as the 
+encoder output. 
 
 \subsection{Units}
 \begin{itemize}
