@@ -165,7 +165,8 @@ aforementioned procedure for
 reference speech to get tensor \(\bm{d_r}\) of shape \(n \times T_r\). But for the mixed 
 speech, instead of directly following the procedure, we first concatenate it with 
 the reference speech to get \(s' = [s_r, s_m, s_r] \in R^{(T^r+T'+T^r)}\). Then we use this speech 
-as input for the encoder, obtaining output \(\bm{d'}\) of shape \(n \times \)
+as input for the encoder, obtaining output \(\bm{d'}\) of shape \(n \times (T_r+T+T_r)\) where \(T\) 
+denotes the length of output by directly passing the mixed speech without concatenation. 
 
 \subsection{Units}
 \begin{itemize}
