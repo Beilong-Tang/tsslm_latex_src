@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{bm}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -102,7 +103,7 @@ Discretization methods have been studied for speech
 enhancement \cite{selm} and blind speech separation \cite{dasb,tokensplit}, 
 however, this approach has 
 been rarely studied for target speaker extraction. In this paper, we present a novel way to do 
-target speaker extraction using discrete tokens and LMs. Inspired by the blind speech separation 
+target speaker extraction using discrete tokens and LMs (TSELM). Inspired by the blind speech separation 
 networks proposed in DASB \cite{dasb}, our model has three stages: encoding, modeling and decoding.
 For the encoding stage, reference speech and mixed speech are tokenized using WavLM and 
 Kmeans as tokenizer. Unlike SELM \cite{selm}, which uses the 6th layer of WavLM as input to the Kmeans layer, 
@@ -129,15 +130,31 @@ has also eliminated the trouble of training a HiFi-GAN for each layer. The encod
 decoder is freezed during the training. The model overview is in Fig.\ref{model}. 
 Through extensive studies, we have demonstrated this method has achieved comparable results in terms 
 of speech quality and intelligibility. To the best of our knowledge, we are the first to explore 
-using discrete tokens to conduct target speaker extraction. 
+using discrete tokens to conduct target speaker extraction.
+
+
 
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{assets/model.pdf}
-\caption{model}
+\caption{Overview of TSELM.}
 \label{model}
 \end{figure*}
+
+\section{Method}
+
+\subsection{Encoding}
+We use pretrained SSL model WavLM Large \cite{wavlm} to 
+encode the speech into continuous representations. We use the output from 6 hidden 
+layers 1, 3, 7, 12, 18, 23. Given a speech signal \(s \in R^{T'} \), the output 
+of WavLM will be a tensor \(\bm{r}\) of shape \(n_l \times T \times E\) where 
+\(n_l\) specifies the number 
+of output layers (6 in this case), and  \(T\) is the time 
+dimension and \(E\) stands for the 
+embedding dimension, specifically 1024 in WavLM Large. The Kmeans tokenizer uses \(n_l\) numbers of  Kmeans model 
+separately on each output layer. Each model uses the same clustering number denoted by \(K\).
+After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a tensor \(\bm{d}\) of shape \(6 \times T\) where each value is \(\in K\)
 
 \subsection{Units}
 \begin{itemize}
