@@ -148,13 +148,18 @@ using discrete tokens to conduct target speaker extraction.
 We use pretrained SSL model WavLM Large \cite{wavlm} to 
 encode the speech into continuous representations. We use the output from 6 hidden 
 layers 1, 3, 7, 12, 18, 23. Given a speech signal \(s \in R^{T'} \), the output 
-of WavLM will be a tensor \(\bm{r}\) of shape \(n_l \times T \times E\) where 
-\(n_l\) specifies the number 
+of WavLM will be a tensor \(\bm{r}\) of shape \(n \times T \times E\) where 
+\(n\) specifies the number 
 of output layers (6 in this case), and  \(T\) is the time 
 dimension and \(E\) stands for the 
-embedding dimension, specifically 1024 in WavLM Large. The Kmeans tokenizer uses \(n_l\) numbers of  Kmeans model 
+embedding dimension, specifically 1024 in WavLM Large. The Kmeans tokenizer uses \(n\) numbers of  Kmeans model 
 separately on each output layer. Each model uses the same clustering number denoted by \(K\).
-After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a tensor \(\bm{d}\) of shape \(6 \times T\) where each value is \(\in K\)
+After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a tensor \(\bm{d}\) of shape \(n \times T\) where each value \(\bm{d}_{(n_i,t)} \in (0, K-1), n_i \in (0,n), t \in 
+(0, T)\). We choose \(K\) to be 1000 in our experiments. 
+
+The encoding strategy on the mixed speech plays a pivotal role in the model performance. 
+We follow the 
+aforementioned procedure for reference speech to get tensor \(\bm{d_r}\) of shape . But for the mixed speech. 
 
 \subsection{Units}
 \begin{itemize}
