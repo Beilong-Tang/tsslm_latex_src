@@ -182,7 +182,7 @@ this strategy plays an important role in the model performance.
 \begin{figure}
 \centering
 \includegraphics[width=0.35\textwidth]{assets/cross_attention.pdf}
-\caption{Overview of TSELM.}
+\caption{Details of Cross Attention mechanism.}
 \label{cross_attention}
 \end{figure}
 \subsubsection{Attention Embedding}
@@ -201,7 +201,8 @@ into the mixture. Spex+ \cite{spex_plus} jointly trains a speaker verification t
 besides the separator, which might not be optimal for the separator task \cite{sef_net}. SEF-Net \cite{sef_net} has proposed an speaker embedding free way to inject the 
 target speaker information into the mixture by using cross attention module, and it has 
 achieved superior performance compared to other methods. Therefore, we apply 
-the cross attention module to inject the reference embedding into the mixture. 
+the cross attention module to inject the reference embedding into the mixture. The details 
+are in Fig.\ref{cross_attention}.
 
 
 \subsection{Units}
