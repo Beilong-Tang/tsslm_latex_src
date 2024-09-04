@@ -197,7 +197,9 @@ and a FiLM module.
 We use \(E_m\) as query and \(E_r\) as key and value for 
 the attention module. The output of the cross-multiple head attention module \(E_{spk}\)
 is passed together with \(E_m\) to the feature-wise linear modulation (FiLM) get the final output of the module. The output of 
-FiLM is denoted as 
+FiLM is denoted as \(E_f = FiLM(E_m, E_{spk}) = \gamma E_{spk} \cdot E_m  + \beta E_{spk} \) where 
+\(\gamma\) and \(\beta\) are learnable parameters denoting the scaling and shifting vectors 
+respectively. The output is then fed to the language model for later modeling.  
 
 
 \subsection{Units}
