@@ -200,7 +200,15 @@ is passed together with \(E_m\) to the feature-wise linear modulation (FiLM) get
 FiLM is denoted as \(E_f = FiLM(E_m, E_{spk}) = \gamma E_{spk} \cdot E_m  + \beta E_{spk} \) where 
 \(\gamma\) and \(\beta\) are learnable parameters denoting the scaling and shifting vectors 
 respectively. The output is then fed to the language model for later modeling.  
-
+\subsubsection{Language Modeling}
+We use encoder-only language models containing multiple self-attention modules to model the injected 
+embedding \(E_f\). Due to encoder-only style, the LM is able to learn from all the positions. 
+Finally, 6 linear classifiers each with dimension \(K\) is used to produce the probability 
+distribution of each layer respectively.
+Cross-entropy loss is applied between 
+the output tokens and the clean tokens through discretizing the 
+ground truth clean audio . 
+\subsection{Decoding}
 
 \subsection{Units}
 \begin{itemize}
