@@ -192,7 +192,8 @@ respectively, each resulting in a tensor of shape \(T \times E\).
 After embedding, we follow the same recipe as in \cite{dasb} to 
 aggregate the tensor by using attention mechanism to sum all the 6 tensors. This summation 
 keeps the information of each layer while reducing the system complexity by reducing the 
-dimension of layers. 
+dimension of layers. After attention embedding, we obtain reference embedding \(E_r\) and 
+mixture embedding \(E_m\).
 
 \subsubsection{Cross Attention}
 One of the key factors in target speaker extraction is to 
@@ -202,7 +203,7 @@ besides the separator, which might not be optimal for the separator task \cite{s
 target speaker information into the mixture by using cross attention module, and it has 
 achieved superior performance compared to other methods. Therefore, we apply 
 the cross attention module to inject the reference embedding into the mixture. The details 
-are in Fig.\ref{cross_attention}.
+are in Fig.\ref{cross_attention}. 
 
 
 \subsection{Units}
