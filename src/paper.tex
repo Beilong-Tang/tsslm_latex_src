@@ -158,12 +158,14 @@ After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a
 (0, T)\). We choose \(K\) to be 1000 in our experiments. For reference speech and mixed speech, we 
 use the same Kmeans model and the same layer output of WavLM. 
 
-The encoding strategy on the mixed speech plays a pivotal role in the model performance. 
+The encoding strategy on the mixed speech plays a pivotal role in the model performance. Assume we 
+have a reference speech \(s_r \in R^{T^r} \) and mixed speech \(s \in R^{T'}\). 
 We follow the 
 aforementioned procedure for 
 reference speech to get tensor \(\bm{d_r}\) of shape \(n \times T_r\). But for the mixed 
 speech, instead of directly following the procedure, we first concatenate it with 
-the reference speech to get \(s' = [s_r, s_m, s_r] \in R^{()}\)
+the reference speech to get \(s' = [s_r, s_m, s_r] \in R^{(T^r+T'+T^r)}\). Then we use this speech 
+as input for the encoder, obtaining output \(d'\) of shape \(n \times \)
 
 \subsection{Units}
 \begin{itemize}
