@@ -155,11 +155,15 @@ dimension and \(E\) stands for the
 embedding dimension, specifically 1024 in WavLM Large. The Kmeans tokenizer uses \(n\) numbers of  Kmeans model 
 separately on each output layer. Each model uses the same clustering number denoted by \(K\).
 After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a tensor \(\bm{d}\) of shape \(n \times T\) where each value \(\bm{d}_{(n_i,t)} \in (0, K-1), n_i \in (0,n), t \in 
-(0, T)\). We choose \(K\) to be 1000 in our experiments. 
+(0, T)\). We choose \(K\) to be 1000 in our experiments. For reference speech and mixed speech, we 
+use the same Kmeans model and the same layer output of WavLM. 
 
 The encoding strategy on the mixed speech plays a pivotal role in the model performance. 
 We follow the 
-aforementioned procedure for reference speech to get tensor \(\bm{d_r}\) of shape . But for the mixed speech. 
+aforementioned procedure for 
+reference speech to get tensor \(\bm{d_r}\) of shape \(n \times T_r\). But for the mixed 
+speech, instead of directly following the procedure, we first concatenate it with 
+the reference speech to get \(s' = [s_r, s_m, s_r] \in R^{()}\)
 
 \subsection{Units}
 \begin{itemize}
