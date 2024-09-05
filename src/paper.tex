@@ -310,10 +310,12 @@ TSELM is compared with Spex+, a discriminative separation model \cite{spex_plus}
 speaker information compared with continuous methods. We compare the speaker 
 similarity of TSELM with the target audio produced by discretizing the clean audio, which is denoted by Target-discrete-WavLM, and it is the upper bound of our model  
 performance. Besides TSELM, we did two experiments 
-denoted by Continuous-WavLM and TSELM-L-Hybrid. For Continuous-WavLM, we directly
+denoted by Continuous-WavLM and TSELM-L-Hybrid using the same training data. 
+For Continuous-WavLM, we directly
 passed the embeddings of the 6th hidden layer output of WavLM to the cross attention  
-and LM, using Mean Square Error loss between the output embeddings and the clean 
-embeddings. We then reconstruct the audio back to the 
+and LM. Concatenation strategy is stilled applied to the mixed speech. Mean Square Error loss is applied between the output embeddings and the clean 
+embeddings. We use the HiFi-GAN in \cite{knn_vc} to reconstruct the audio. For 
+TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we did not discretize the 
 
 
 
