@@ -260,7 +260,7 @@ Finally, 6 linear classifiers each with dimension \(K\) is used to produce the p
 distribution of each layer respectively.
 Cross-entropy loss is applied between 
 the output tokens and the clean tokens through discretizing the 
-ground truth clean audio.
+ground truth clean audio. 
 
 \section{Experiments}
 
@@ -308,7 +308,7 @@ public WeSpeaker \cite{wespeaker}.
 All models are reflected in Table \ref{main_exp}. 
 TSELM is compared with Spex+, a discriminative separation model \cite{spex_plus} trained on Libri2Mix \cite{librimix}. Since the discretization might lose some 
 speaker information compared with continuous methods. We compare the speaker 
-similarity of TSELM with the target audio produced by discretizating the clean audio, which is denoted by Target-discrete-WavLM. 
+similarity of TSELM with the target audio produced by discretizing the clean audio, which is denoted by Target-discrete-WavLM. 
 
 
 
