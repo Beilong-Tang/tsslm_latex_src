@@ -232,7 +232,8 @@ LibriTTS \cite{libritts}. The modeling stage is trained on
 \texttt{train\_clean\_100} and \texttt{train\_clean\_360} of LibriSpeech. All training data are 
 generated on the fly with relative SNR between 0 dB to 5 dB. The mixture audio is segmented to 3 
 seconds and the reference speech is segmented to 4 seconds. 
-We use embedding dimension \(d=1024\) and 
+We use embedding dimension 1024, sinusoidal positional embedding, and 4 transformer 
+encoders each with 16 heads and MLP with hidden dimension of 1024 in the cross attention module. 
 
 % \subsubsection{Test sets}
 % We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and other baseline models. 
