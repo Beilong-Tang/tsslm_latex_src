@@ -230,7 +230,14 @@ is trained on \texttt{train\_clean\_100}, \texttt{train\_clean\_360}, and \textt
 LibriSpeech \cite{librispeech}, and the scalable HiFi-GAN is trained on \texttt{train\_clean\_100} of 
 LibriTTS \cite{libritts}. The modeling stage is trained on 
 \texttt{train\_clean\_100} and \texttt{train\_clean\_360} of LibriSpeech. All training data are 
-generated on the fly with relative SNR between 0 dB to 5 dB. 
+generated on the fly with relative SNR between 0 dB to 5 dB. The mixture audio is segmented to 3 
+seconds and the reference speech is segmented to 4 seconds. 
+
+\subsubsection{Test sets}
+We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and other baseline models. 
+
+\subsubsection{Evaluation Metrics}
+
 
 \subsection{Units}
 \begin{itemize}
