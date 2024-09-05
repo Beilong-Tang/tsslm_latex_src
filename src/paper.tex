@@ -170,11 +170,11 @@ distribution of the clean tokens.
                                     &                             &                             & SIG     & BAK     & OVL    &                       &                          \\
             \hline
             Mixture                 & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
-            Target-discrete-wavlm   & -                           & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
+            Target-discrete-WavLM   & -                           & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
             \hline
             Spex+                   & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
             \hline
-            Continuous-wavlm        & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
+            Continuous-WavLM       & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
             TSELM-L-Hybrid          & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
             \hline
             TSELM-S                 & Discrete                    & 354M                        & 3.50    & 4.07    & 3.24   & 28.1\%                & 0.892\_d                 \\
@@ -184,9 +184,10 @@ distribution of the clean tokens.
             \end{tabular}
             \linebreak
             \caption{Sample table showing different categories of items with their quantities.}
+            \label{main_exp}
             This table 
       \end{center}
-      \label{main_exp}
+      
   \end{table*}
 
   
@@ -304,8 +305,10 @@ public WeSpeaker \cite{wespeaker}.
 
 
 \subsection{Baseline models}
-All models are reflected in tabel \ref{}
-TSELM is compared with Spex+, a discriminative separation model, \cite{spex_plus} trained on Libri2Mix \cite{librimix}. 
+All models are reflected in Table \ref{main_exp}. 
+TSELM is compared with Spex+, a discriminative separation model \cite{spex_plus} trained on Libri2Mix \cite{librimix}. Since the discretization might lose some 
+speaker information compared with continuous methods. We compare the speaker 
+similarity of TSELM with the target audio produced by discretizating the clean audio, which is denoted by Target-discrete-WavLM. 
 
 
 
