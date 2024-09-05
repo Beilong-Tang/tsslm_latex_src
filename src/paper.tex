@@ -13,6 +13,7 @@
 \usepackage{multirow}
 \usepackage{tabularx, colortbl, makecell}
 \usepackage{etoolbox}
+
 \makeatletter
 \patchcmd{\@makecaption}
   {\scshape}
@@ -160,14 +161,17 @@ distribution of the clean tokens.
 
 \subsection{Encoding}
 
+
 \begin{table*}
     \setlength{\tabcolsep}{12pt} % Adjust column spacing
     \renewcommand{\arraystretch}{1.3}
     \begin{center}
         \begin{tabular}{cccccccc}
             \Xhline{2\arrayrulewidth} % Bold top line
-            \multirow{2}{*}{System} & \multirow{2}{*}{Model type} & \multirow{2}{*}{Model size} & \multicolumn{3}{c}{DNSMOS} & \multirow{2}{*}{dWER} & \multirow{2}{*}{Spk Sim} \\
-                                    &                             &                             & SIG     & BAK     & OVL    &                       &                          \\
+            \multirow{2}{*}{System} & \multirow{2}{*}{Model type} & \multirow{2}{*}{Model size} & \multicolumn{3}{c}{ DNSMOS $\uparrow$} & \multirow{2}{*}{dWER $\downarrow$} & \multirow{2}{*}{Spk Sim $\uparrow$} \\
+            \cline{4-6}
+                                    &                             &                             & SIG     & BAK     & OVL    &                       &                          \\ 
+                                    % \cline{2-2}
             \hline
             Mixture                 & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
             Target-discrete-WavLM   & -                           & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
@@ -183,7 +187,8 @@ distribution of the clean tokens.
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
             \linebreak
-            \caption{Sample table showing different categories of items with their quantities.}
+            \caption{The performance of different systems on Libri2Mix testset. For 
+            speaker similarity(last column). }
             \label{main_exp}
             This table 
       \end{center}
@@ -315,16 +320,20 @@ For Continuous-WavLM, we directly
 passed the embeddings of the 6th hidden layer output of WavLM to the cross attention  
 and LM. Concatenation strategy is stilled applied to the mixed speech. Mean Square Error loss is applied between the output embeddings and the clean 
 embeddings. We use the HiFi-GAN in \cite{knn_vc} to reconstruct the audio. For 
-TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we did not discretize the 
+TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we kept discretizing the reference 
+speech while utilizing the continuous embeddings from the reference speech. We call 
+it hybrid instead of fully discretized because the mixture speech has continuous 
+features instead of discrete features. 
+
+\section{Results and Discussions}
+
+
 
 
 
 \section*{Acknowledgment}
 
-The preferred spelling of the word ``acknowledgment'' in America is without 
-an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
-G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
-acknowledgments in the unnumbered footnote on the first page.
+We want to thank for Kunshan Super Computing SCNet for providing the computing resources. 
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
