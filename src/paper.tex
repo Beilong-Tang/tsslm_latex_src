@@ -201,8 +201,7 @@ target speaker information into the mixture by using cross attention module, and
 achieved superior performance compared to other methods. Therefore, we apply 
 the cross attention module to inject the reference embedding into the mixture. The details 
 are in Fig.\ref{cross_attention}.
-The cross attention module consists of a positional 
-embedding layer, a cross-multiple head attention module, 
+The cross attention module consists of a stack of cross-multiple head attention modules, 
 and a FiLM module. 
 We use \(E_m\) as query and \(E_r\) as key and value for 
 the attention module. The output of the cross-multiple head attention module \(E_{spk}\)
@@ -234,7 +233,7 @@ generated on the fly with relative SNR between 0 dB to 5 dB. The mixture audio i
 seconds and the reference speech is segmented to 4 seconds. 
 
 We use the output from hidden layers 1, 3, 7, 12, 18, 23 from WavLM Large for tokenization. 
-We use embedding dimension 1024, sinusoidal positional embedding, and 4 transformer 
+We use embedding dimension 1024,  4 transformer 
 encoders each with 16 heads and MLP with hidden dimension of 1024 in the cross attention module. We 
 use layer norm after the cross attention module. 
 We use separate embedding tables in attention embedding module for reference and mixed speech due to our observations that not 
