@@ -12,6 +12,14 @@
 \usepackage{bm}
 \usepackage{multirow}
 \usepackage{tabularx, colortbl, makecell}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@makecaption}
+  {\scshape}
+  {}
+  {}
+  {}
+\makeatother
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -174,9 +182,14 @@ distribution of the clean tokens.
             TSELM-L                 & Discrete                    & 468M                        & 3.49    & 4.05    & 3.22   & 27.1\%                & 0.905\_d \\
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
+            \linebreak
+            \caption{Sample table showing different categories of items with their quantities.}
+            This table 
       \end{center}
-      \caption{This table }
+      \label{main_exp}
   \end{table*}
+
+  
 
 We use pretrained SSL model WavLM Large \cite{wavlm} to 
 encode the speech into continuous representations. We use the output from 6 hidden 
@@ -291,9 +304,8 @@ public WeSpeaker \cite{wespeaker}.
 
 
 \subsection{Baseline models}
-
-TSELM is compared with 
-
+All models are reflected in tabel \ref{}
+TSELM is compared with Spex+, a discriminative separation model, \cite{spex_plus} trained on Libri2Mix \cite{librimix}. 
 
 
 
