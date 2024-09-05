@@ -237,8 +237,10 @@ We use embedding dimension 1024,  4 transformer
 encoders each with 16 heads and MLP with hidden dimension of 1024 in the cross attention module. We 
 use layer norm after the cross attention module. 
 We use separate embedding tables in attention embedding module for reference and mixed speech due to our observations that not 
-sharing embeddings does slightly better than sharing embeddings. The small version of TSELM-S uses 
-embedding dimension \(d\) = 256, absolute sinusoidal positional embedding, and there are 
+sharing embeddings does slightly better than sharing embeddings. The LM of small version TSELM-S uses 
+embedding dimension \(d\) = 256, absolute sinusoidal positional embedding, conformer encoders as backbone of LM. The conformer encoder is composed of 
+6 layers with kernel size 31 each with 4 heads and an MLP with hidden dimension 2048. The medium version TSELM-M uses \(d\) = 512 with 8 layers and 8 heads and the large version TSELM-L uses 
+\(d\) = 768 with 12 layers and 16 heads.
 
 % \subsubsection{Test sets}
 % We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and other baseline models. 
