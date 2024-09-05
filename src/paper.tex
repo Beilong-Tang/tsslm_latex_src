@@ -240,10 +240,14 @@ We use separate embedding tables in attention embedding module for reference and
 sharing embeddings does slightly better than sharing embeddings. The LM of small version TSELM-S uses 
 embedding dimension \(d\) = 256, absolute sinusoidal positional embedding, conformer encoders as backbone of LM. The conformer encoder is composed of 
 6 layers with kernel size 31 each with 4 heads and an MLP with hidden dimension 2048. The medium version TSELM-M uses \(d\) = 512 with 8 layers and 8 heads and the large version TSELM-L uses 
-\(d\) = 768 with 12 layers and 16 heads.
+\(d\) = 768 with 12 layers and 16 heads. We use AdamW as 
+our optimizer for all the experiments. The learning rate 
+is \(5 \times 10^{-4}\) for TSELM-S and \(5 \times 10^{-5}\) for TSELM-M and TSELM-L. 
+
 
 \subsection{Evaluation}
-We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and other baseline models. 
+We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and compare it with 
+other baseline models. 
 
 It is shown that metrics like PESQ, SI-SNR, STOI do not reflect speech quality of output of 
 vocoders due to the fact that the vocoder output does not focus strictly on frame alignment
