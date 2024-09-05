@@ -10,6 +10,8 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{bm}
+\usepackage{multirow}
+\usepackage{tabularx, colortbl, makecell}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -256,7 +258,31 @@ word error
 rate (dWER) \cite{dwer} to measure the speech intelligibility. For speaker similarity, we use the 
 public WeSpeaker \cite{wespeaker}.
 
+\begin{table}
+    % \setlength{\tabcolsep}{12pt} % Adjust column spacing
+    % \renewcommand{\arraystretch}{1.3}
+    \begin{center}
+        \begin{tabular}{llllll}
+            System                & type & size & DNSMOS & dWER   & Sim  \\
+            Mixture               & -          & -          & 2.68   & 79.3\% & -        \\
+            Target & -          & -          & 3.32   & 11.3\% & 0.653    \\
+                                  &            &            &        &        &          \\
+            Spex+                 & Continuous & 11M        & 2.98   & 19.3\% & 0.923    \\
+            Continuous     & Continuous & 220M       & 3.27   & 14.7\% & 0.877    \\
+            TSELM       & Hybrid     & 468M       & 3.22   & 19.8\% & 0.924\_d \\
+                                  &            &            &        &        &          \\
+            TSELM-S               & Discrete   & 354M       & 3.24   & 28.1\% & 0.892\_d \\
+            TSELM-M               & Discrete   & 389M       & 3.22   & 28.4\% & 0.901\_d \\
+            TSELM-L               & Discrete   & 468M       & 3.22   & 27.1\% & 0.905\_d
+            \end{tabular}
+      \end{center}
+      \caption{This table }
+  \end{table}
 
+
+\subsection{Baseline models}
+
+TSELM is compared with 
 
 
 % \subsubsection{Test sets}
@@ -378,15 +404,24 @@ below the figures; table heads should appear above the tables. Insert
 figures and tables after they are cited in the text. Use the abbreviation 
 ``Fig.~\ref{fig}'', even at the beginning of a sentence.
 
-\begin{center}
-\begin{tabular}{ c c c }
-    \hline
-    cell1 & cell2 & cell3 \\ 
-    \hline
-    cell4 & cell5 & cell6 \\  
-    cell7 & cell8 & cell9    
-\end{tabular}
-\end{center}
+% % \begin{center}
+% \begin{table*}{ c c c c c c c c }
+%     \hline
+%     System & Type & Model size & DNSMOS & dWER & Spk Sim 
+% \end{table*}
+% % \end{center}
+
+% \begin{table*}[t]
+%     \centering
+%     \begin{tabular}{lcr}
+%         \hline
+%       \multirow{2}{System} & 2 & 3 \\
+%       4 & 5 & 6 \\
+%       7 & 8 & 9
+%     \end{tabular}
+%     \caption{Blabla}
+%     \label{tab:1}
+%   \end{table*}
 
 \begin{table}[htbp]
 \caption{Table Type Styles}
