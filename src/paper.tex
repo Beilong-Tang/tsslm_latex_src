@@ -245,6 +245,10 @@ embedding dimension \(d\) = 256, absolute sinusoidal positional embedding, confo
 \subsection{Evaluation}
 We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and other baseline models. 
 
+It is shown that metrics like PESQ, SI-SNR, STOI do not reflect speech quality of output of 
+vocoders due to the fact that the vocoder output does not focus strictly on frame alignment
+\cite{tokensplit,selm}. To measure the speech quality, 
+speech intelligibility, and speech similarity.  
 
 % \subsubsection{Test sets}
 % We use the \texttt{dev} set of Libri2Mix \cite{librimix} to test our model performance and other baseline models. 
