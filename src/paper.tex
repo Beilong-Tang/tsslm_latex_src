@@ -179,6 +179,7 @@ distribution of the clean tokens.
             \hline
             Continuous-WavLM   & G    & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
             TSELM-L-Hybrid    & G       & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
+            TSELM-S-NoConcat           & G       & Discrete                    & 354M                        & 3.47    & 4.03    & 3.19   & 69.6\%                & 0.868\_d                 \\
             \hline
             TSELM-S           & G       & Discrete                    & 354M                        & 3.50    & 4.07    & 3.24   & 28.1\%                & 0.892\_d                 \\
             TSELM-M          & G        & Discrete                    & 389M                        & 3.49    & 4.05    & 3.22   & 28.4\%                & 0.901\_d                 \\
@@ -343,7 +344,7 @@ This suggests that our model has better speech quality compared with discriminat
 worse in speech intelligibility. One possible reason might be related 
 to the discretization process on the mixture 
 speech. Our Kmeans algorithm is trained on clean speech instead of mixed speech. 
- For speech enhancement, this might be 
+For speech enhancement, this might be 
 good because the level of noise will usually be smaller than the speech. Kmeans might achieve the 
 effect of denoising. Discretization on the mixed
 speech, however, might cause the output to focus on wrong speakers. 
@@ -353,6 +354,14 @@ this. For TSELM-L-Hybrid, we use the continuous embeddings from the mixture spee
 achieved similar dWER with Spex+. Another reason might be related to LM. Right now our encoder-only 
 LM satisfies roughly 50\% accuracy. We think using auto-regressive or masking models will achieve 
 better results. 
+
+We observe significant dWER increasing without concatenating the reference audio to the mixture, 
+as shown 
+the TSELM-S-NoConcat in Table \ref{main_exp}. WavLM \cite{wavlm} is demonstrated to have target speaker 
+separation capability. The input audio should have the mixture less than 50\% and have the first utterance as target speaker. The output will be a coarse denoised audio emphasizing the target speaker. 
+If the whole input is mixture, we have found that WavLM sometimes will 
+extract the wrong speaker. Our current pipeline focuses on the separation strategy
+
 
 
 
