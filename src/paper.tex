@@ -163,6 +163,11 @@ distribution of the clean tokens.
 
 
 \begin{table*}
+    \caption{The performance of different systems on Libri2Mix testset. For TSELM-L-Hybrid  
+    and TSELM, we compare the speaker similarity with the discretized target speech 
+    (Target-discrete-WavLM) instead of the target speech due to the observation that 
+    the process of discretization already losses the speaker information (0.653 for 
+    Target-discrete-WavLM). We use "\_d" to denote it.  }
     \setlength{\tabcolsep}{12pt} % Adjust column spacing
     \renewcommand{\arraystretch}{1.3}
     \begin{center}
@@ -177,7 +182,7 @@ distribution of the clean tokens.
             \hline
             Spex+                   &  D & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
             \hline
-            Continuous-WavLM   & G    & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
+            Continuous-WavLM-L6   & G    & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
             TSELM-L-Hybrid    & G       & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
             TSELM-S-NoConcat           & G       & Discrete                    & 354M                        & 3.47    & 4.03    & 3.19   & 69.6\%                & 0.868\_d                 \\
             \hline
@@ -187,13 +192,9 @@ distribution of the clean tokens.
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
             \linebreak
-            \caption{The performance of different systems on Libri2Mix testset. For TSELM-L-Hybrid  
-            and TSELM, we compare the speaker similarity with the discretized target speech 
-            (Target-discrete-WavLM) instead of the target speech due to the observation that 
-            the process of discretization already losses the speaker information (0.653 for 
-            Target-discrete-WavLM). We use "\_d" to denote it.  }
             \label{main_exp}
       \end{center}
+    %   \vspace{-10pt}
   \end{table*}
 
 
@@ -269,9 +270,8 @@ ground truth clean audio.
 
 \section{Experiments}
 
-
 \begin{table}
-    \setlength{\tabcolsep}{4pt} % Adjust column spacing
+    
     \renewcommand{\arraystretch}{1.2}
     \begin{center}
         \begin{tabular}{ccccccc}
@@ -292,11 +292,14 @@ ground truth clean audio.
             
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
-            \linebreak
-            \label{main_exp}
+            \label{abla_1}
+    
       \end{center}
-  \end{table}
+      \caption{Iwdad}
+      \vspace{-25pt}
+    \end{table}
 
+  
 \subsection{Training}
 
 We use the publicly available Kmeans tokenizer and scalable 
