@@ -171,7 +171,6 @@ distribution of the clean tokens.
             \multirow{2}{*}{System} & \multirow{2}{*}{Model type} & \multirow{2}{*}{Model size} & \multicolumn{3}{c}{ DNSMOS $\uparrow$} & \multirow{2}{*}{dWER $\downarrow$} & \multirow{2}{*}{Spk Sim $\uparrow$} \\
             \cline{4-6}
                                     &                             &                             & SIG     & BAK     & OVL    &                       &                          \\ 
-                                    % \cline{2-2}
             \hline
             Mixture                 & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
             Target-discrete-WavLM   & -                           & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
@@ -328,10 +327,18 @@ decoder, which is WavLM Large and HiFi-GAN respectively. DNSMOS is calculated ov
 test sets since it is reference-free. dWER is calculated with the clean speech instead 
 of the discretized speech due to our observations that this does not make much difference. 
 For TSELM-L-Hybrid and TSELM, we compute the speaker similarity with the discretized
-target speech (Target-discrete-WavLM).
-
-% instead of the target speech due to the observation that the process of discretization already losses the speaker
+target speech (Target-discrete-WavLM) instead of the target speech.
+% due to the observation that the process of discretization already losses the speaker
 % information (0.653 for Target-discrete-WavLM). 
+We observe that the process of discretization already losses the speaker
+information (0.653 for Target-discrete-WavLM), and it might be related to the inevitable speaker 
+information loss by the process of discretization. Future work should focus on developing better 
+tokenization methods for SSL models. 
+Since work focuses on using the discretized information 
+to do target speaker extraction instead of developing better tokenization methods, we think it is 
+reasonable to compare our outputs with the discretized speech since it serves as an upper bond.   
+
+We observe that our model performs better than Spex+ in terms of the DNSMOS scores but worse in dWER. 
 
 
 
