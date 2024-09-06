@@ -95,9 +95,12 @@ of known speakers, target speaker extraction (TSE) aims at only extracting the
 target speaker's voice given another auxiliary information of the target speaker. Most models nowadays are discriminative models. They 
 utilize a masking strategy to minimize the distance between the clean speech and estimated 
 speech directly \cite{luo2019conv,spex_plus,sepformer,sef_net}. However, these discriminative 
-models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. To solve these issues, researchers have proposed generative models. This method aims to learn the underlying distribution of the target speaker's voice and use this knowledge to generate the clean speech of the target speaker from a mixture of voices rather 
-than directly mapping from mixed speech to clean speech. Some generative models, like diffusion
-models \cite{target_diff} and variational autoencoders (VAE) \cite{vae} have been studied. It has been demonstrated that generative models can achieve results comparable to those of discriminative models \cite{target_diff,tokensplit}.
+models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. 
+To solve these issues, researchers have proposed generative models. This method aims to learn the underlying distribution of the target speech and generate it rather
+than mapping from mixed speech to clean speech. 
+Some generative models, like diffusion
+models \cite{target_diff} and variational autoencoders (VAE) \cite{vae} have been studied. 
+It has been demonstrated that generative models can achieve results comparable to those of discriminative models \cite{target_diff,tokensplit}.
 
 Discretization of audio has been studied due to the advancement of language models (LM). 
 This approach translates the audio into discrete tokens simulating text vocabularies and uses LMs to 
