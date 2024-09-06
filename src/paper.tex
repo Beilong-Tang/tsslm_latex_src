@@ -65,14 +65,14 @@ target speaker extraction, speech separation, language models, audio discretizat
 \end{IEEEkeywords}
 \begin{figure*}[t]
     \centering
-    \includegraphics[width=\textwidth]{assets/model.pdf}
+    \includegraphics[width=0.9\textwidth]{assets/model.pdf}
     \caption{Overview of TSELM.}
     \label{model}
     \end{figure*}
 
     \begin{figure}
         \centering
-        \includegraphics[width=0.35\textwidth]{assets/cross_attention.pdf}
+        \includegraphics[width=0.25\textwidth]{assets/cross_attention.pdf}
         \caption{Details of Cross Attention mechanism.}
         \label{cross_attention}
         \end{figure}
@@ -117,7 +117,7 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
     the process of discretization already losses the speaker information (0.653 for 
     Target-discrete-WavLM). We use "\_d" to denote it.  }
     \setlength{\tabcolsep}{12pt} % Adjust column spacing
-    \renewcommand{\arraystretch}{1.3}
+    \renewcommand{\arraystretch}{1.2}
     \begin{center}
         \begin{tabular}{ccccccccc}
             \Xhline{2\arrayrulewidth} % Bold top line
@@ -126,7 +126,7 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
               &                   &                             &                             & SIG     & BAK     & OVL    &                       &                          \\ 
             \hline
             Mixture                 & - & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
-            Target-discrete-WavLM   & G & -                          & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
+            Target-Discrete   & G & -                          & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
             \hline
             Spex+                   &  D & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
             \hline
@@ -147,7 +147,7 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
 
   \begin{table}
     
-    \renewcommand{\arraystretch}{1.2}
+    \renewcommand{\arraystretch}{1.1}
     \begin{center}
         \begin{tabular}{ccccccc}
             \Xhline{2\arrayrulewidth} % Bold top line
@@ -173,7 +173,7 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
             }
             \label{hubert_wavlm_6}
       \end{center}
-      \vspace{-25pt}
+      \vspace{-32.5pt}
     \end{table}
 
 
@@ -192,30 +192,22 @@ dimension of layers. After attention embedding, we obtain reference embedding \(
 mixture embedding \(E_m\).
 
 \subsubsection{Cross Attention}
-One of the key factors in target speaker extraction is to 
-inject the information of target speaker 
-into the mixture. Spex+ \cite{spex_plus} jointly trains a speaker verification task module 
-besides the separator, which might not be optimal for the separator task \cite{sef_net}. SEF-Net \cite{sef_net} has proposed an speaker embedding free way to inject the 
-target speaker information into the mixture by using cross attention module, and it has 
-achieved superior performance compared to other methods. Therefore, we apply 
-the cross attention module to inject the reference embedding into the mixture. The details 
-are in Fig.\ref{cross_attention}.
-The cross attention module consists of a stack of cross-multiple head attention modules, 
-and a FiLM module. 
+We apply cross attention module in \cite{usef_tes} to inject the reference embeddings into the mixture. The details 
+are shown in Fig.\ref{cross_attention}.
+The cross attention module consists of a stack of cross-multiple head attention modules, followed by
+a feature-wise linear modulation (FiLM) module. 
 We use \(E_m\) as query and \(E_r\) as key and value for 
-the attention module. The output of the cross-multiple head attention module \(E_{spk}\)
-is passed together with \(E_m\) to the feature-wise linear modulation (FiLM) get the final output of the module. The output of 
-FiLM is denoted as \(E_f = FiLM(E_m, E_{spk}) = \gamma E_{spk} \cdot E_m  + \beta E_{spk} \) where 
+the attention module. The output from the cross-multiple head attention module \(E_{spk}\)
+is passed together with \(E_m\) to the FiLM to obtain the final output. The output of 
+FiLM  \(E_f = FiLM(E_m, E_{spk}) = \gamma E_{spk} \cdot E_m  + \beta E_{spk} \) where 
 \(\gamma\) and \(\beta\) are learnable parameters denoting the scaling and shifting vectors 
-respectively. The output is then fed to the language model for later modeling.  
+respectively.
+
 \subsubsection{Language Modeling}
-We use encoder-only language models containing multiple self-attention modules to model the injected 
+We use encoder-only transformers containing multiple self-attention modules to model the 
 embedding \(E_f\). Due to encoder-only style, the LM is able to learn from all the positions. 
-Finally, 6 linear classifiers each with dimension \(K\) is used to produce the probability 
-distribution of each layer respectively.
-Cross-entropy loss is applied between 
-the output tokens and the clean tokens through discretizing the 
-ground truth clean audio. 
+Finally, 6 linear classifiers each with dimension \(K\) is used to produce the logit scores of the tokens.
+Cross-entropy loss is applied between the predicted tokens and the clean tokens, which are obtained by discretizing the ground truth clean audio.
 
 \section{Experiments}
 
@@ -225,25 +217,20 @@ ground truth clean audio.
 
 We use the publicly available Kmeans tokenizer and scalable 
 HiFi-GAN decoder in \cite{speechbrain}. The Kmeans tokenizer
-is trained on \texttt{train\_clean\_100}, \texttt{train\_clean\_360}, and \texttt{train\_other\_500} of
+is trained on \texttt{train\_clean\_[100,360,500]} of
 LibriSpeech \cite{librispeech}, and the scalable HiFi-GAN is trained on \texttt{train\_clean\_100} of 
 LibriTTS \cite{libritts}. The modeling stage is trained on 
-\texttt{train\_clean\_100} and \texttt{train\_clean\_360} of LibriSpeech. All training data are 
-generated on the fly with relative SNR between 0 dB to 5 dB. The mixture audio is segmented to 3 
-seconds and the reference speech is segmented to 4 seconds. 
+\texttt{train\_clean\_[100,360]} of LibriSpeech. All training data are 
+generated on the fly with relative SNR between 0 to 5 dB. The mixture audio and reference audio is clipped to 3 and 4 seconds, respectively.
 
-We use the output from hidden layers 1, 3, 7, 12, 18, 23 from WavLM Large and Kmeans model with 
+We utilize the output from hidden layers 1, 3, 7, 12, 18, 23 from WavLM Large and Kmeans model with 
 \(K=1000\).
-We use embedding dimension 1024,  4 transformer 
-encoders each with 16 heads and MLP with hidden dimension of 1024 in the cross attention module. We 
-use layer norm after the cross attention module. 
-We use separate embedding tables in attention embedding module for reference and mixed speech due to our observations that not 
-sharing embeddings does slightly better than sharing embeddings. The LM of small version TSELM-S uses 
-embedding dimension \(d\) = 256, absolute sinusoidal positional embedding, conformer encoders as backbone of LM. The conformer encoder is composed of 
-6 layers with kernel size 31 each with 4 heads and an MLP with hidden dimension 2048. The medium version TSELM-M uses \(d\) = 512 with 8 layers and 8 heads and the large version TSELM-L uses 
+We use embedding dimension 1024.  The cross-attention module consists of four transformer encoders, each with 16 attention heads and an MLP with a hidden dimension of 1024. Layer normalization is applied after the cross-attention module.
+The LM of small version TSELM-S uses 
+embedding dimension \(d\) = 256, absolute sinusoidal positional embedding, conformer encoders as backbone of LM. The conformer encoder consists of 6 layers with a kernel size of 31, each with 4 attention heads, and an MLP with a hidden dimension of 2048. The medium version TSELM-M uses \(d\) = 512 with 8 layers and 8 heads and the large version TSELM-L uses 
 \(d\) = 768 with 12 layers and 16 heads. We use AdamW as 
 our optimizer for all the experiments. The learning rate 
-is \(5 \times 10^{-4}\) for TSELM-S and \(5 \times 10^{-5}\) for TSELM-M and TSELM-L. We use 8 16Gb ram GPUs. Our batch size is set to 128. We train the model for 40k steps. 
+is \(5 \times 10^{-4}\) for TSELM-S and \(5 \times 10^{-5}\) for TSELM-M and TSELM-L. We train the model using 8 GPUs with 16 GB of RAM each each with batch size 16 for a total of 40,000 steps.
 
 
 \subsection{Evaluation}
@@ -259,20 +246,20 @@ public WeSpeaker \cite{wespeaker}.
 
 
 \subsection{Baseline models}
-All models are reflected in Table \ref{main_exp}. 
+Baseline models are reflected in Table \ref{main_exp}. 
 TSELM is compared with Spex+, a discriminative separation model \cite{spex_plus} trained on Libri2Mix \cite{librimix}. Since the discretization might lose some 
 speaker information compared with continuous methods. We compare the speaker 
-similarity of TSELM with the target audio produced by discretizing the clean audio, which is denoted by Target-discrete-WavLM, and it is the upper bound of our model  
-performance. Besides TSELM, we did two experiments 
-denoted by Continuous-WavLM and TSELM-L-Hybrid using the same training data. 
-For Continuous-WavLM, we directly
+similarity of TSELM with the target audio produced by discretizing the clean audio, which is denoted by Target-Discrete, and it is the upper bound of our model  
+performance. Besides TSELM, we did three main experiments 
+denoted by Continuous-WavLM-L6, TSELM-L-Hybrid and TSELM-S-NoConcat using the same training data. 
+For Continuous-WavLM-6, we directly
 passed the embeddings of the 6th hidden layer output of WavLM to the cross attention  
-and LM. Concatenation strategy is stilled applied to the mixed speech. Mean Square Error loss is applied between the output embeddings and the clean 
-embeddings. We use the HiFi-GAN in \cite{knn_vc} to reconstruct the audio. For 
+and LM. Concatenation strategy is stilled applied to the mixed speech. Mean Square Error (MSE) loss is applied between the output embeddings and the clean 
+embeddings. HiFi-GAN in \cite{knn_vc} is used to reconstruct the audio. For 
 TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we kept discretizing the reference 
 speech while utilizing the continuous embeddings from the reference speech. We call 
 it hybrid instead of fully discretized because the mixture speech has continuous 
-features instead of discrete features. 
+features instead of discrete features. For TSELM-S-NoConcat, we utilize the TSELM-S model architecture but without concatenation strategy. 
 
 \section{Results and Discussions}
 Table \ref{main_exp} shows the performance of different systems on the Libri2Mix test.
