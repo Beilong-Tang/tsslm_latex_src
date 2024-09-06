@@ -219,10 +219,11 @@ distribution of the clean tokens.
             
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
-            \label{huber_wavlm_6}
+            \linebreak
             \caption{Performance of different SSL models and layer selections. HuBERT model subsitutes the WavLM Large to HuBERT Large as the SSL model.
             The WavLM-L6 uses only the 6th layer of hidden output of WavLM Large. WavLM denotes our TSELM model which uses 6 different output layers. 
             }
+            \label{hubert_wavlm_6}
       \end{center}
       \vspace{-25pt}
     \end{table}
@@ -397,7 +398,13 @@ If the whole input is mixture, we have found that WavLM sometimes will
 extract the wrong speaker. Inspired by SELM's \cite{selm} success in speech denoising. Our pipeline is trying to transform
 the target speaker separation problem to speech enhancement problem by using WavLM's denoising capability.
 
+In Table \ref{hubert_wavlm_6}, we have compared the performance of different SSL models and the selection between one layer or multiple layers to discretize. 
+Our results have shown that the using HuBERT as SSL model has achieved better DNSMOS scores but with worse dWER compared to our WavLM baseline.
+The better DNSMOS scores might be related to the vocoders but it does not reflect the speech intelligibility which is important in speech separation. 
+For dWER, this might be because that HuBERT is trained on clean speech and that it might not capture the rich speech information of mixed speeches. 
+Our results from WavLM-L6 have shown that for speech separation, using multiple layers to discretize is better than using only one layer. 
 
+Finally, we have observed a performance gap between discrete methods and continuous methods. 
 
 \section{Conclusion}
 
