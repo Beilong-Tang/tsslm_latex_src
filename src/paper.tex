@@ -248,16 +248,16 @@ public WeSpeaker \cite{wespeaker}.
 Baseline models are presented in Table \ref{main_exp}. 
 TSELM is compared with Spex+ \cite{spex_plus}, a discriminative separation model trained on Libri2Mix \cite{librimix}. Since discretization can potentially lose speaker information compared to continuous methods. We compute the speaker 
 similarity of output from TSELM with the target audio produced by discretizing the clean audio, denoted by Target-Discrete, representing the upper bound of our model  
-performance. Besides TSELM, we conduct three main experiments 
-denoted by Continuous-WavLM-L6, TSELM-L-Hybrid and TSELM-S-NoConcat using the same training data. 
+performance. Besides TSELM, we conduct three main experiments, named
+ Continuous-WavLM-L6, TSELM-L-Hybrid and TSELM-S-NoConcat using the same training data. 
 For Continuous-WavLM-6, we directly
-passed the embeddings of the 6th hidden layer output of WavLM to the cross attention  
-and LM. Concatenation strategy is stilled applied to the mixed speech. Mean Square Error (MSE) loss is applied between the output embeddings and the clean 
-embeddings. HiFi-GAN in \cite{knn_vc} is used to reconstruct the audio. For 
-TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we kept discretizing the reference 
-speech while utilizing the continuous embeddings from the reference speech. We call 
-it hybrid instead of fully discretized because the mixture speech has continuous 
-features instead of discrete features. For TSELM-S-NoConcat, we utilize the TSELM-S model architecture but without concatenation strategy. 
+pass the embeddings from the 6th hidden layer output of WavLM Large to the cross attention  
+and LM without discretization. 
+The concatenation strategy is stilled applied to the mixed speech. Mean Square Error (MSE) loss is applied between the output embeddings and the clean 
+embeddings. HiFi-GAN in \cite{knn_vc} is used for audio reconstruction. For 
+TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we discretize the reference 
+speech while utilizing the continuous embeddings from the mixed speech. We call 
+it hybrid because the mixture speech retains continuous features. In TSELM-S-NoConcat, we utilize the TSELM-S model architecture but without concatenation strategy. 
 
 \section{Results and Discussions}
 Table \ref{main_exp} shows the performance of different systems on the Libri2Mix test.
