@@ -57,16 +57,11 @@ ming.li369@dukekunshan.edu.cn}
 \maketitle
 
 \begin{abstract}
-We present TSELM, a novel target speaker extraction network using discrete tokens and language models. This model utilizes multiple discretized layers
-of WavLM Large as input tokens. It uses cross attention to inject target speaker information and language models to model the sequences. It uses 
-a scalable HiFi-GAN to reconstruct the audio from the tokens. It uses 
-cross entropy loss to model the probability of output tokens, transforming the complex regression problems into classification problems. To the best of our 
-knowledge, we are the first to do target speaker extraction using discrete tokens. However, there is still a gap between our model and continuous methods. 
-Our codes and pretrained models are available at: \href{https://github.com/Beilong-Tang/TSELM}{https://github.com/Beilong-Tang/TSELM} .
+  We propose TSELM, a novel target speaker extraction network that leverages discrete tokens and language models. The model utilizes multiple discretized layers from WavLM Large as input tokens and incorporates cross-attention mechanisms to integrate target speaker information. Language models are employed to capture the sequence dependencies, while a scalable HiFi-GAN is used to reconstruct the audio from the tokens. By applying a cross-entropy loss, TSELM models the probability distribution of output tokens, thus converting the complex regression problem of audio generation into a classification task. To the best of our knowledge, this is the first approach to target speaker extraction using discrete tokens. However, a performance gap remains between our method and continuous approaches. The code and pretrained models are available at: \href{https://github.com/Beilong-Tang/TSELM}{https://github.com/Beilong-Tang/TSELM}.
 \end{abstract}
 
 \begin{IEEEkeywords}
-target speaker extraction, speech separation, language models, audio discretization
+target speaker extraction, speech separation, language models, audio discretization, Self-Supervised Models
 \end{IEEEkeywords}
 \begin{figure*}[t]
     \centering
@@ -93,9 +88,9 @@ The discretization of audio has gained significant attention with the advancemen
 
 Discretization methods have been studied for speech 
 enhancement \cite{selm} and blind speech separation \cite{dasb,tokensplit}, 
-however, this approach has 
-been rarely studied for target speaker extraction. In this paper, we present a novel way to do 
-target speaker extraction using discrete tokens and LMs (TSELM). Inspired by the blind speech separation 
+however, it has 
+rarely been studied for TSE. In this paper, we present a novel way to do 
+target speaker extraction using discrete tokens and LMs called \textbf{TSELM}. Inspired by the blind speech separation 
 networks proposed in DASB \cite{dasb}, our model has three stages: encoding, modeling and decoding.
 For the encoding stage, reference speech and mixed speech are tokenized using WavLM and 
 Kmeans as tokenizer. Unlike SELM \cite{selm}, which uses the 6th layer of WavLM as input to the Kmeans layer, 
