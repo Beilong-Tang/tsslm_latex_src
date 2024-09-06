@@ -196,6 +196,7 @@ distribution of the clean tokens.
       \end{center}
   \end{table*}
 
+
 We use pretrained SSL model WavLM Large \cite{wavlm} to 
 encode the speech into continuous representations. We use the output from 6 hidden 
 layers 1, 3, 7, 12, 18, 23. Given a speech signal \(s \in R^{T'} \), the output 
@@ -267,6 +268,34 @@ the output tokens and the clean tokens through discretizing the
 ground truth clean audio. 
 
 \section{Experiments}
+
+
+\begin{table}
+    \setlength{\tabcolsep}{4pt} % Adjust column spacing
+    \renewcommand{\arraystretch}{1.2}
+    \begin{center}
+        \begin{tabular}{ccccccc}
+            \Xhline{2\arrayrulewidth} % Bold top line
+            \multirow{2}{*}{SSL-Model} & \multirow{2}{*}{Type} & \multicolumn{3}{c}{ DNSMOS $\uparrow$} & \multirow{2}{*}{dWER $\downarrow$} & \multirow{2}{*}{Spk Sim $\uparrow$} \\
+            \cline{3-5}
+                                                       &                             & SIG     & BAK     & OVL    &                       &                          \\ 
+            \hline
+            \multirow{2}{*}{Hubert}                              &  Discrete                          & 3.56    & 4.09    & 3.30   & 81.3\%                & 0.865\_d                        \\
+                                             &  Hybrid                          & 3.57    & 4.10    & 3.32   & 35.1\%                & 0.907\_d                        \\
+            \hline
+            \multirow{2}{*}{WavLM-L6}                              &  Discrete                          & 2.08    & 2.07    & 1.64   & 122.1\%                & 0.589\_d                        \\
+            &  Hybrid                          & 3.57    & 4.10    & 3.32   & 35.1\%                & 0.907\_d                        \\
+            \hline
+            \hline
+            \multirow{2}{*}{WavLM}                                     &  Discrete                          & 3.49    & 4.05    & 3.22   & 27.1\%                & 0.905\_d                        \\
+                                              &  Hybrid                          & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                        \\
+            
+            \Xhline{2\arrayrulewidth} % Bold top line              
+            \end{tabular}
+            \linebreak
+            \label{main_exp}
+      \end{center}
+  \end{table}
 
 \subsection{Training}
 
@@ -362,6 +391,8 @@ separation capability. The input audio should have the mixture less than 50\% an
 If the whole input is mixture, we have found that WavLM sometimes will 
 extract the wrong speaker. Inspired by SELM's \cite{selm} success in speech denoising. Our pipeline is trying to transform
 the target speaker separation problem to speech enhancement problem by using WavLM's denoising capability.
+
+\section{Conclusion}
 
 
 
