@@ -411,9 +411,13 @@ has the best performance in terms of DNSMOS and dWER. It has a better dWER of 13
 information loss of discretization process. We hope future research will work to bridge this gap.   
 
 \section{Conclusion}
-In this work, we introduced a novel way using discrete tokens and language models for target speaker extraction. Experiments have 
+In this work, we introduced a novel way using discrete tokens and language models for target speaker extraction.
+We use multiple hidden layers of WavLM and Kmeans tokenizers as encoder, cross attention and language model as our separation model, and a scalable HiFi-GAN to reconstruct the 
+audio. 
+Experiments have 
 shown that our model can achieve excellent performance in terms of speech quality, and comparable performance in terms of speech intelligibility and 
-speaker similarity. However, we still have a gap between continuous methods especially in speech intelligibility. 
+speaker similarity. However, we still have a gap between continuous methods especially in speech intelligibility and speaker similarity. Future research should focus on shrinking 
+this gap. 
 
 
 
