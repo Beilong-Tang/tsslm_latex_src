@@ -13,6 +13,7 @@
 \usepackage{multirow}
 \usepackage{tabularx, colortbl, makecell}
 \usepackage{etoolbox}
+\usepackage{hyperref}
 
 \makeatletter
 \patchcmd{\@makecaption}
@@ -26,8 +27,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Target Speaker Extraction using Discrete Representations from 
-Self-Supervised Models and Language Models
+\title{TSELM: Target speaker extraction using discrete tokens and language models
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
@@ -404,7 +404,11 @@ The better DNSMOS scores might be related to the vocoders but it does not reflec
 For dWER, this might be because that HuBERT is trained on clean speech and that it might not capture the rich speech information of mixed speeches. 
 Our results from WavLM-L6 have shown that for speech separation, using multiple layers to discretize is better than using only one layer. 
 
-Finally, we have observed a performance gap between discrete methods and continuous methods. 
+Finally, we have observed a performance gap between discrete methods and continuous methods (Continuous-WavLM-L6) on target 
+speaker extraction as shown in Table \ref{main_exp}. For Continuous-WavLM-L6,
+we use the 6th layer embedding output from WavLM from both the mixed speech and reference speech, and use MSE loss between the output from LM and the clean embeddings. This method 
+has the best performance in terms of DNSMOS and dWER. It has a better dWER of 13.6\% compared with TSELM-L. This might be related to the 
+information loss of discretization process. We hope future research will work to bridge the gap.   
 
 \section{Conclusion}
 

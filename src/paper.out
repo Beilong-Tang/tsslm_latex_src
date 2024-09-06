@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Method}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Encoding}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Modeling}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Attention Embedding}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Cross Attention}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Language Modeling}{subsection.2.2}% 7
+\BOOKMARK [1][-]{section.3}{Experiments}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Training}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Evaluation}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Baseline models}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Results and Discussions}{}% 12
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 13
+\BOOKMARK [1][-]{section*.2}{References}{}% 14
