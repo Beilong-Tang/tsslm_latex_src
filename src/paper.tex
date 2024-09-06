@@ -193,12 +193,8 @@ distribution of the clean tokens.
             the process of discretization already losses the speaker information (0.653 for 
             Target-discrete-WavLM). We use "\_d" to denote it.  }
             \label{main_exp}
-            This table 
       \end{center}
-      
   \end{table*}
-
-  
 
 We use pretrained SSL model WavLM Large \cite{wavlm} to 
 encode the speech into continuous representations. We use the output from 6 hidden 
@@ -326,6 +322,17 @@ it hybrid instead of fully discretized because the mixture speech has continuous
 features instead of discrete features. 
 
 \section{Results and Discussions}
+Table \ref{main_exp} shows the performance of different systems on the Libri2Mix test.
+The model size for Target-discrete-WavLM denotes the model size of the encoder and 
+decoder, which is WavLM Large and HiFi-GAN respectively. DNSMOS is calculated over the 
+test sets since it is reference-free. dWER is calculated with the clean speech instead 
+of the discretized speech due to our observations that this does not make much difference. 
+For TSELM-L-Hybrid and TSELM, we compute the speaker similarity with the discretized
+target speech (Target-discrete-WavLM).
+
+% instead of the target speech due to the observation that the process of discretization already losses the speaker
+% information (0.653 for Target-discrete-WavLM). 
+
 
 
 
