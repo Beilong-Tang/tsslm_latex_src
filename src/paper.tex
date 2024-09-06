@@ -91,9 +91,8 @@ target speaker extraction, speech separation, language models, audio discretizat
 % speech separation models.
 
 Unlike blind speech separation, which focuses on separating each utterance from a mixture 
-of known speakers, target speaker extraction aims at only extracting the 
-target speaker's voice given another auxiliary information of the target speaker. Due to the 
-development of Deep Neural Network (DNN), many models nowadays are discriminative models. They 
+of known speakers, target speaker extraction (TSE) aims at only extracting the 
+target speaker's voice given another auxiliary information of the target speaker. Most models nowadays are discriminative models. They 
 utilize a masking strategy to minimize the distance between the clean speech and estimated 
 speech directly \cite{luo2019conv,spex_plus,sepformer,sef_net}. However, these discriminative 
 models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. To solve these issues, researchers have proposed generative models. This method aims to learn the underlying distribution of the target speaker's voice and use this knowledge to generate the clean speech of the target speaker from a mixture of voices rather 
