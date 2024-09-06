@@ -187,8 +187,11 @@ distribution of the clean tokens.
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
             \linebreak
-            \caption{The performance of different systems on Libri2Mix testset. For 
-            speaker similarity(last column). }
+            \caption{The performance of different systems on Libri2Mix testset. For TSELM-L-Hybrid  
+            and TSELM, we compare the speaker similarity with the discretized target speech 
+            (Target-discrete-WavLM) instead of the target speech due to the observation that 
+            the process of discretization already losses the speaker information (0.653 for 
+            Target-discrete-WavLM). We use "\_d" to denote it.  }
             \label{main_exp}
             This table 
       \end{center}
@@ -268,9 +271,6 @@ the output tokens and the clean tokens through discretizing the
 ground truth clean audio. 
 
 \section{Experiments}
-
-
-
 
 \subsection{Training}
 
