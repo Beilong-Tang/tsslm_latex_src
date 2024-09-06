@@ -86,51 +86,25 @@ In contrast to blind speech separation, which seeks to isolate individual uttera
 
 The discretization of audio has gained significant attention with the advancement of language models (LMs). This method converts audio into discrete tokens, allowing LMs to model them, thereby simplifying audio generation tasks by transforming complex regression problems into classification tasks \cite{dasb}. Currently, there are two main approaches to audio discretization. The first involves the use of neural audio codecs \cite{dac}, which typically capture the acoustic features of the audio \cite{speech_tokenizer}. The second approach leverages self-supervised learning (SSL) models, such as HuBERT \cite{hubert} and WavLM \cite{wavlm}. SSL models have demonstrated outstanding performance across numerous downstream tasks \cite{superb}, as they extract continuous representations rich in semantic and timbral information from speech. As shown in \cite{dasb}, SSL models outperform neural audio codecs in tasks like speech enhancement and separation. Consequently, this paper primarily focuses on exploring the discretization of SSL models.
 
-Discretization methods have been studied for speech 
-enhancement \cite{selm} and blind speech separation \cite{dasb,tokensplit}, 
-however, it has 
-rarely been studied for TSE. In this paper, we present a novel way to do 
-target speaker extraction using discrete tokens and LMs called \textbf{TSELM}. Inspired by the blind speech separation 
-networks proposed in DASB \cite{dasb}, our model has three stages: encoding, modeling and decoding.
-For the encoding stage, reference speech and mixed speech are tokenized using WavLM and 
-Kmeans as tokenizer. Unlike SELM \cite{selm}, which uses the 6th layer of WavLM as input to the Kmeans layer, 
-we follow the recipes in \cite{dasb} and uses the output from hidden 
-layers 1, 3, 7, 12, 18, 23 of WavLM as input to the Kmeans layer. 6 Kmeans models
-are trained and applied on each layer output respectively. 
-Our results indicate that using multiple layers as 
-input is better 
-than using only the 6th layer. The reference speech is fed to the encoder directly. 
-However, for the mixed speech, instead of directly passing it to the WavLM model, we first concatenated the reference speech on both sides 
-of it before passing. After tokenization, we use only the tokens 
-corresponding to the mixed speech. For the modeling stage, we utilized an attention 
-embedding mechanism to add each embeddings of all layers together. We used a Cross 
-Attention mechanism similar in \cite{sef_net} to inject the speaker information. 
-An encoder-only LM, following by a linear classifier, is applied after the cross attention module
-to output the reconstructed tokens. 
-For the decoding stage, we used the pretrained unit HiFi-GAN 
-in \cite{unit_hifi} to reconstruct the 
-discrete tokens back to audio. Unlike SELM \cite{selm}, where a conformer 
-detokenizer is trained 
-to reconstruct the WavLM embeddings using Kmeans center embeddings before HiFi-GAN, \cite{unit_hifi} has proposed a scalable HiFi-GAN using dropout mechanism to directly 
-reconstruct audio from multiple layers of tokens without a conformer detokenizer. It 
-has also eliminated the trouble of training a HiFi-GAN for each layer. The encoder and 
-decoder is freezed during the training. The model overview is in Fig.\ref{model}. 
-Through extensive studies, we have demonstrated this method has achieved comparable results in terms 
-of speech quality and intelligibility. To the best of our knowledge, we are the first to explore 
-using discrete tokens to conduct target speaker extraction. Our demos are available at \href{https://beilong-tang.github.io/TSELM.demo/}{https://beilong-tang.github.io/TSELM.demo/}.
+Discretization methods have been explored for tasks such as speech enhancement \cite{selm} and blind speech separation \cite{dasb,tokensplit}, but their application to target speaker extraction (TSE) has been limited. In this paper, we present a novel approach to target speaker extraction using discrete tokens and language models, named \textbf{TSELM}. Inspired by the blind speech separation networks proposed in DASB \cite{dasb}, our model is structured into three stages: encoding, modeling, and decoding.
+
+In the encoding stage, both reference and mixed speech are tokenized using WavLM and Kmeans as the tokenizer. Unlike SELM \cite{selm}, which utilizes the 6th layer of WavLM as input to the Kmeans layer, we follow the approach in \cite{dasb} and use outputs from WavLM's hidden layers 1, 3, 7, 12, 18, and 23 as input to six separate Kmeans models, one for each layer. Our results show that using multiple layers as input is superior to using only the 6th layer. The reference speech is passed directly to the encoder, while for mixed speech, we concatenate the reference speech to both sides of the mixture before passing it through the WavLM model. After tokenization, we retain only the tokens corresponding to the mixed speech.
+In the modeling stage, an attention embedding mechanism is employed to combine the embeddings from all layers. A cross-attention mechanism, similar to that used in \cite{usef_tes}, is applied to inject speaker-specific information. An encoder-only language model, followed by a linear classifier, is then used to generate the reconstructed tokens.
+In the decoding stage, we leverage the pretrained scalable HiFi-GAN from \cite{unit_hifi} to reconstruct the audio from the discrete tokens. Unlike SELM \cite{selm}, where a conformer detokenizer is trained to reconstruct WavLM embeddings before passing them through HiFi-GAN, the scalable HiFi-GAN in \cite{unit_hifi} uses a dropout mechanism to directly reconstruct audio from multiple layers of tokens, eliminating the need for a conformer detokenizer and the complexity of training a separate HiFi-GAN for each layer. Both the encoder and decoder are kept frozen during training, and an overview of the model is shown in Fig.\ref{model}.
+Extensive experiments demonstrate that our method achieves excellent speech quality and comparable intelligibility results. To the best of our knowledge, this is the first study to explore target speaker extraction using discrete tokens. Our demos are available at \href{https://beilong-tang.github.io/TSELM.demo/}{https://beilong-tang.github.io/TSELM.demo/}.
 
 
 
 \section{Method}
-Our model consists of three stages: encoding, modeling, and decoding. The encoder and decoder are 
-pretrained models and they are freezed during training. For the encoding stage, we use multiple layers of WavLM 
-and publicly available Kmeans 
-models in \cite{dasb} to produce the discretized tokens. We use a special concatenation 
-strategy to encode the mixture speech. For decoders, we use the scalable HiFi-GAN available in 
-\cite{dasb} to reconstruct the audio from discretized tokens. Our main focus is on the
-modeling stage. We apply an attention embedding mechanism to embed discrete tokens from different 
-layers into one single embedding. Encoder-only LM and linear classifier is applied afterwards to optimize the likelihood of probability 
-distribution of the clean tokens. 
+% Our model consists of three stages: encoding, modeling, and decoding. The encoder and decoder are 
+% pretrained models and they are freezed during training. For the encoding stage, we use hidden layers 1, 3, 7, 12, 18, and 23 (denoted as \(n_l\)) of WavLM-Large 
+% and publicly available Kmeans 
+% models in \cite{dasb} to produce the discretized tokens. We use a concatenation 
+% strategy to encode the mixture speech. For decoders, we use the scalable HiFi-GAN available in 
+% \cite{dasb} to reconstruct the audio from discretized tokens. Our main focus is on the
+% modeling stage. We apply an attention embedding mechanism to embed discrete tokens from different 
+% layers into one single embedding. Encoder-only LM and linear classifier is applied afterwards to optimize the likelihood of probability 
+% distribution of the clean tokens. 
 
 
 \subsection{Encoding}
@@ -203,42 +177,12 @@ distribution of the clean tokens.
     \end{table}
 
 
-We use pretrained SSL model WavLM Large \cite{wavlm} to 
-encode the speech into continuous representations. We use the output from 6 hidden 
-layers 1, 3, 7, 12, 18, 23. Given a speech signal \(s \in R^{T'} \), the output 
-of WavLM will be a tensor \(\bm{r}\) of shape \(n \times T \times E\) where 
-\(n\) specifies the number 
-of output layers (6 in this case), and  \(T\) is the time 
-dimension and \(E\) stands for the 
-embedding dimension, specifically 1024 in WavLM Large. The Kmeans tokenizer uses \(n\) numbers of  Kmeans model 
-separately on each output layer. Each model uses the same clustering number denoted by \(K\).
-After tokenization, the continuous embedding \(\bm{r}\) will be transformed to a tensor \(\bm{d}\) of shape \(n \times T\) where each value \(\bm{d}_{(n_i,t)} \in (0, K-1), n_i \in (0,n), t \in 
-(0, T)\). We choose \(K\) to be 1000 in our experiments. For reference speech and mixed speech, we 
-use the same Kmeans model and the same layer output of WavLM. The encoder is freezed during training.
-
-The encoding strategy on the mixed speech plays a pivotal role in the model performance. Assume we 
-have a reference speech \(s_r \in R^{T^r} \) and mixed speech \(s \in R^{T'}\). 
-We follow the 
-aforementioned procedure for 
-reference speech to get tensor \(\bm{d_r}\) of shape \(n \times T_r\). But for the mixed 
-speech, instead of directly following the procedure, we first concatenate it with 
-the reference speech to get \(s' = [s_r, s_m, s_r] \in R^{(T^r+T'+T^r)}\). Then we use this speech 
-as input for the encoder, obtaining output \(\bm{d'}\) of shape \(n \times (T_r+T+T_r)\) where \(T\) 
-denotes the length of output by directly passing the mixed speech without concatenation. \(\bm{d'}\) 
-contains the discrete tokens for two pieces of the same reference speech and one piece of the mixed 
-speech, we select tensor \(\bm{d}\) belonging only to the mixed speech of shape \(n\times T\) as the 
-encoder output. This process is inspired by the training schema of WavLM \cite{wavlm}. To ensure the 
-model correctly outputs rich information of the target speaker, it is trained by 
-having a clean speech overlapped with another interference less than 50\% of the length of the clean 
-speech and using the first utterance as the main speaker. By this way, the model identifiers the 
-main speaker and produces embedding focusing on the main speaker. Our later experiments showed that 
-this strategy plays an important role in the model performance. 
-
-
-
+We use the pretrained self-supervised learning (SSL) model WavLM Large \cite{wavlm} to encode speech into continuous representations. Specifically, we extract the outputs from six hidden layers: 1, 3, 7, 12, 18, and 23. Given a speech signal \(s \in \mathbb{R}^{T'}\), the output of WavLM is a tensor \(\bm{r}\) with shape \(n \times T \times E\), where \(n\) is the number of output layers (6 in this case), \(T\) is the time dimension, and \(E\) represents the embedding dimension, which is 1024 in WavLM Large.  For tokenization, we apply separate Kmeans models to each output layer, with each model using the same number of clusters, denoted by \(K\). After tokenization, the continuous embedding \(\bm{r}\) is transformed into a discrete tensor \(\bm{d}\) with shape \(n \times T\), where each value \(\bm{d}_{i} \in (0, K-1) \). In all our experiments, we set \(K = 1000\). For both reference and mixed speech, the same Kmeans model and the same layer combination from WavLM Large are used. The encoder remains frozen during training.
+The encoding strategy for mixed speech is crucial to the performance of the model. Given a reference speech \(s_r \in \mathbb{R}^{T^r}\) and a mixed speech \(s_m \in \mathbb{R}^{T'}\), we follow the previously described procedure to encode the reference speech into a tensor \(\bm{d_r}\) of shape \(n \times T_r\). However, for mixed speech, instead of applying the encoding directly, we first concatenate it with the reference speech, creating a signal \(s' = [s_r, s_m, s_r] \in \mathbb{R}^{(T^r + T' + T^r)}\). This concatenated signal is then input into the encoder, producing an output tensor \(\bm{d'}\) with shape \(n \times (T_r + T + T_r)\), where \(T\) represents the time dimension for the mixed speech without concatenation. The tensor \(\bm{d'}\) contains discrete tokens for the two segments of reference speech and the mixed speech. We extract the portion \(\bm{d}\) corresponding only to the mixed speech, resulting in an output tensor of shape \(n \times T\).
+This approach is inspired by the training schema of WavLM \cite{wavlm}, which trains the model by overlapping clean speech with an interfering signal that covers less than 50\% of the clean speech's duration, using the first utterance as the primary speaker. This allows WavLM to identify and focus on the main speaker when producing embeddings. Our experiments demonstrated that this concatenation strategy significantly enhances the model's performance by guiding it to prioritize the target speaker's information.
 \subsection{Modeling}
 \subsubsection{Attention Embedding}
-After obtaining the discrete tensor \(\bm{d}\) with shape \(n\times T\), we use 6
+After obtaining the discrete tensor \(\bm{d}\) with shape \(6 \times T\), we use 6
 learnable embedding tables each with \(K\) entires to embed the 6 layers 
 respectively, each resulting in a tensor of shape \(T \times E\). 
 After embedding, we follow the same recipe as in \cite{dasb} to 
