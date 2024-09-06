@@ -408,9 +408,12 @@ Finally, we have observed a performance gap between discrete methods and continu
 speaker extraction as shown in Table \ref{main_exp}. For Continuous-WavLM-L6,
 we use the 6th layer embedding output from WavLM from both the mixed speech and reference speech, and use MSE loss between the output from LM and the clean embeddings. This method 
 has the best performance in terms of DNSMOS and dWER. It has a better dWER of 13.6\% compared with TSELM-L. This might be related to the 
-information loss of discretization process. We hope future research will work to bridge the gap.   
+information loss of discretization process. We hope future research will work to bridge this gap.   
 
 \section{Conclusion}
+In this work, we introduced a novel way using discrete tokens and language models for target speaker extraction. Experiments have 
+shown that our model can achieve excellent performance in terms of speech quality, and comparable performance in terms of speech intelligibility and 
+speaker similarity. However, we still have a gap between continuous methods especially in speech intelligibility. 
 
 
 
@@ -419,10 +422,9 @@ information loss of discretization process. We hope future research will work to
 
 
 
+% \section*{Acknowledgment}
 
-\section*{Acknowledgment}
-
-We want to thank for Kunshan Super Computing SCNet for providing the computing resources. 
+% We want to thank for Kunshan Super Computing SCNet for providing the computing resources. 
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
