@@ -130,6 +130,7 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
             \hline
             Spex+                   &  D & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
             \hline
+            \hline
             Continuous-WavLM-L6   & G    & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
             TSELM-L-Hybrid    & G       & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
             TSELM-S-NoConcat           & G       & Discrete                    & 354M                        & 3.47    & 4.03    & 3.19   & 69.6\%                & 0.868\_d                 \\
@@ -244,11 +245,10 @@ public WeSpeaker \cite{wespeaker}.
 
 
 \subsection{Baseline models}
-Baseline models are reflected in Table \ref{main_exp}. 
-TSELM is compared with Spex+, a discriminative separation model \cite{spex_plus} trained on Libri2Mix \cite{librimix}. Since the discretization might lose some 
-speaker information compared with continuous methods. We compare the speaker 
-similarity of TSELM with the target audio produced by discretizing the clean audio, which is denoted by Target-Discrete, and it is the upper bound of our model  
-performance. Besides TSELM, we did three main experiments 
+Baseline models are presented in Table \ref{main_exp}. 
+TSELM is compared with Spex+ \cite{spex_plus}, a discriminative separation model trained on Libri2Mix \cite{librimix}. Since discretization can potentially lose speaker information compared to continuous methods. We compute the speaker 
+similarity of output from TSELM with the target audio produced by discretizing the clean audio, denoted by Target-Discrete, representing the upper bound of our model  
+performance. Besides TSELM, we conduct three main experiments 
 denoted by Continuous-WavLM-L6, TSELM-L-Hybrid and TSELM-S-NoConcat using the same training data. 
 For Continuous-WavLM-6, we directly
 passed the embeddings of the 6th hidden layer output of WavLM to the cross attention  
