@@ -28,7 +28,6 @@
 \begin{document}
 
 \title{TSELM: Target speaker extraction using discrete tokens and language models
-\thanks{Our demos are available at: }
 }
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Beilong Tang}
@@ -86,10 +85,10 @@ target speaker extraction, speech separation, language models, audio discretizat
 
         
 \section{Introduction}
-Speech separation, the so-called cocktail party problem \cite{cocktail}, focuses on separating each individual speaker's source from a mixture with multiple speakers. This task is easy for humans but not for computers. 
-In real life, speech signals are usually companied with background noise or other speakers' speeches. 
-These corrupted signals may not be optimal for tasks like speaker verification \cite{rao2019targetspeakerextractionoverlapped,9414017}, and speech recognition \cite{molkov2017SpeakerAwareNN, 8462661}, emphasizing the importance of having good and robust 
-speech separation models.
+% Speech separation, the so-called cocktail party problem \cite{cocktail}, focuses on separating each individual speaker's source from a mixture with multiple speakers. This task is easy for humans but not for computers. 
+% In real life, speech signals are usually companied with background noise or other speakers' speeches. 
+% These corrupted signals may not be optimal for tasks like speaker verification \cite{rao2019targetspeakerextractionoverlapped,9414017}, and speech recognition \cite{molkov2017SpeakerAwareNN, 8462661}, emphasizing the importance of having good and robust 
+% speech separation models.
 
 Unlike blind speech separation, which focuses on separating each utterance from a mixture 
 of known speakers, target speaker extraction aims at only extracting the 
@@ -146,7 +145,7 @@ has also eliminated the trouble of training a HiFi-GAN for each layer. The encod
 decoder is freezed during the training. The model overview is in Fig.\ref{model}. 
 Through extensive studies, we have demonstrated this method has achieved comparable results in terms 
 of speech quality and intelligibility. To the best of our knowledge, we are the first to explore 
-using discrete tokens to conduct target speaker extraction.
+using discrete tokens to conduct target speaker extraction. Our demos are available at \href{https://beilong-tang.github.io/TSELM.demo/}{https://beilong-tang.github.io/TSELM.demo/}.
 
 
 
