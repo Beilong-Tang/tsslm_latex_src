@@ -166,23 +166,23 @@ distribution of the clean tokens.
     \setlength{\tabcolsep}{12pt} % Adjust column spacing
     \renewcommand{\arraystretch}{1.3}
     \begin{center}
-        \begin{tabular}{cccccccc}
+        \begin{tabular}{ccccccccc}
             \Xhline{2\arrayrulewidth} % Bold top line
-            \multirow{2}{*}{System} & \multirow{2}{*}{Model type} & \multirow{2}{*}{Model size} & \multicolumn{3}{c}{ DNSMOS $\uparrow$} & \multirow{2}{*}{dWER $\downarrow$} & \multirow{2}{*}{Spk Sim $\uparrow$} \\
-            \cline{4-6}
-                                    &                             &                             & SIG     & BAK     & OVL    &                       &                          \\ 
+            \multirow{2}{*}{System} & \multirow{2}{*}{Category} & \multirow{2}{*}{Model type} & \multirow{2}{*}{Model size} & \multicolumn{3}{c}{ DNSMOS $\uparrow$} & \multirow{2}{*}{dWER $\downarrow$} & \multirow{2}{*}{Spk Sim $\uparrow$} \\
+            \cline{5-7}
+              &                   &                             &                             & SIG     & BAK     & OVL    &                       &                          \\ 
             \hline
-            Mixture                 & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
-            Target-discrete-WavLM   & -                           & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
+            Mixture                 & - & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
+            Target-discrete-WavLM   & G & -                          & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
             \hline
-            Spex+                   & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
+            Spex+                   &  D & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
             \hline
-            Continuous-WavLM       & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
-            TSELM-L-Hybrid          & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
+            Continuous-WavLM   & G    & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
+            TSELM-L-Hybrid    & G       & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
             \hline
-            TSELM-S                 & Discrete                    & 354M                        & 3.50    & 4.07    & 3.24   & 28.1\%                & 0.892\_d                 \\
-            TSELM-M                 & Discrete                    & 389M                        & 3.49    & 4.05    & 3.22   & 28.4\%                & 0.901\_d                 \\
-            TSELM-L                 & Discrete                    & 468M                        & 3.49    & 4.05    & 3.22   & 27.1\%                & 0.905\_d \\
+            TSELM-S           & G       & Discrete                    & 354M                        & 3.50    & 4.07    & 3.24   & 28.1\%                & 0.892\_d                 \\
+            TSELM-M          & G        & Discrete                    & 389M                        & 3.49    & 4.05    & 3.22   & 28.4\%                & 0.901\_d                 \\
+            TSELM-L         & G         & Discrete                    & 468M                        & 3.49    & 4.05    & 3.22   & 27.1\%                & 0.905\_d \\
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
             \linebreak
