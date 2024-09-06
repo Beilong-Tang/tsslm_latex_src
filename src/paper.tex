@@ -85,36 +85,11 @@ target speaker extraction, speech separation, language models, audio discretizat
 
         
 \section{Introduction}
-% Speech separation, the so-called cocktail party problem \cite{cocktail}, focuses on separating each individual speaker's source from a mixture with multiple speakers. This task is easy for humans but not for computers. 
-% In real life, speech signals are usually companied with background noise or other speakers' speeches. 
-% These corrupted signals may not be optimal for tasks like speaker verification \cite{rao2019targetspeakerextractionoverlapped,9414017}, and speech recognition \cite{molkov2017SpeakerAwareNN, 8462661}, emphasizing the importance of having good and robust 
-% speech separation models.
 
-Unlike blind speech separation, which focuses on separating each utterance from a mixture 
-of known speakers, target speaker extraction (TSE) aims at only extracting the 
-target speaker's voice given another auxiliary information of the target speaker. Most models nowadays are discriminative models. They 
-utilize a masking strategy to minimize the distance between the clean speech and estimated 
-speech directly \cite{luo2019conv,spex_plus,sepformer,sef_net}. However, these discriminative 
-models may not generalize well to unseen data and might even introduce unwanted distortions \cite{distortion}. 
-To solve these issues, researchers have proposed generative models. This method aims to learn the underlying distribution of the target speech and generate it rather
-than mapping from mixed speech to clean speech. 
-Some generative models, like diffusion
-models \cite{target_diff} and variational autoencoders (VAE) \cite{vae} have been studied. 
-It has been demonstrated that generative models can achieve results comparable to those of discriminative models \cite{target_diff,tokensplit}.
+In contrast to blind speech separation, which seeks to isolate individual utterances from a mixture of known speakers, target speaker extraction (TSE) focuses on extracting only the voice of the target speaker using auxiliary information specific to that speaker. Current models are predominantly discriminative, employing masking strategies to directly minimize the distance between the estimated and clean speech signals \cite{luo2019conv,spex_plus,sepformer,sef_net}. However, these discriminative approaches often struggle to generalize to unseen data and may introduce undesirable distortions \cite{distortion}. To address these limitations, generative models have been proposed. These models aim to learn the underlying distribution of the target speech and generate it, rather than merely mapping mixed speech to clean speech. Generative models have been shown to achieve performance comparable to that of discriminative models \cite{target_diff,tokensplit} in blind speech separation and TSE.
 
-Discretization of audio has been studied due to the advancement of language models (LM). 
-This approach translates the audio into discrete tokens simulating text vocabularies and uses LMs to 
-model them. This approach simplifies audio generation tasks by transforming the complex 
-regression problems into classification problems \cite{dasb}. There are currently two approaches for
-audio discretization, the first one uses neural audio codecs \cite{dac}. This approach 
-typically captures the acoustic features of the audio \cite{speech_tokenizer}. The second approach 
-utilizes  self-supervised Learning (SSL) models like HuBERT \cite{hubert} and WavLM \cite{wavlm}.
-SSL models have demonstrated 
-excellent performances on many downstream tasks \cite{superb}. These SSL models extract  
-continuous representations containing rich semantic and timbre information from a given speech. 
-As demonstrated in \cite{dasb}, SSL models perform better than audio codec in tasks like speech 
-enhancement and speech separation. Therefore, in this 
-paper, we mainly explore the discretization of SSL models.  
+
+The discretization of audio has gained significant attention with the advancement of language models (LMs). This method converts audio into discrete tokens, allowing LMs to model them, thereby simplifying audio generation tasks by transforming complex regression problems into classification tasks \cite{dasb}. Currently, there are two main approaches to audio discretization. The first involves the use of neural audio codecs \cite{dac}, which typically capture the acoustic features of the audio \cite{speech_tokenizer}. The second approach leverages self-supervised learning (SSL) models, such as HuBERT \cite{hubert} and WavLM \cite{wavlm}. SSL models have demonstrated outstanding performance across numerous downstream tasks \cite{superb}, as they extract continuous representations rich in semantic and timbral information from speech. As shown in \cite{dasb}, SSL models outperform neural audio codecs in tasks like speech enhancement and separation. Consequently, this paper primarily focuses on exploring the discretization of SSL models.
 
 Discretization methods have been studied for speech 
 enhancement \cite{selm} and blind speech separation \cite{dasb,tokensplit}, 
