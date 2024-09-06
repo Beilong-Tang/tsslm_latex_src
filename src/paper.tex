@@ -339,7 +339,13 @@ to do target speaker extraction instead of developing better tokenization method
 reasonable to compare our outputs with the discretized speech since it serves as an upper bond.   
 
 We observe that our model performs better than Spex+ in terms of the DNSMOS scores but worse in dWER. 
-
+This suggests that our model has better speech quality compared with discriminative models but 
+worse in speech intelligibility. One possible reason might be related 
+to the discretization process on the mixture 
+speech. Our Kmeans algorithm is trained on clean speech instead of mixed speech. 
+Discretization on the mixed
+speech might cause the output to focus on wrong speakers. Our results from TSELM-L-Hybrid proves this. For TSELM-L-Hybrid, we use the continuous 
+embeddings from mixture speech and it has 
 
 
 
