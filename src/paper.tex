@@ -110,40 +110,6 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
 \subsection{Encoding}
 
 
-\begin{table*}
-    \caption{The performance of different systems on Libri2Mix testset. "G" means generative while "D" means discriminative. For discrete models,
-    we compute the speaker similarity with the discretized target speech 
-    (Target-discrete-WavLM). We use "\_d" to denote it.  }
-    \setlength{\tabcolsep}{12pt} % Adjust column spacing
-    \renewcommand{\arraystretch}{1.2}
-    \begin{center}
-        \begin{tabular}{ccccccccc}
-            \Xhline{2\arrayrulewidth} % Bold top line
-            \multirow{2}{*}{System} & \multirow{2}{*}{Category} & \multirow{2}{*}{Model type} & \multirow{2}{*}{Model size} & \multicolumn{3}{c}{ DNSMOS $\uparrow$} & \multirow{2}{*}{dWER $\downarrow$} & \multirow{2}{*}{Spk Sim $\uparrow$} \\
-            \cline{5-7}
-              &                   &                             &                             & SIG     & BAK     & OVL    &                       &                          \\ 
-            \hline
-            Mixture                 & - & -                           & -                           & 3.39    & 3.14    & 2.68   & 79.3\%                & -                        \\
-            Target-Discrete   & G & -                          & 330M                           & 3.57    & 4.10    & 3.32   & 11.3\%                & 0.653                    \\
-            \hline
-            Spex+                   &  D & Continuous                  & 11M                         & 3.36    & 3.76    & 2.98   & 19.3\%                & 0.923                    \\
-            \hline
-            \hline
-            Continuous-WavLM-L6   & G    & Continuous                  & 220M                        & 3.56    & 4.06    & 3.27   & 14.7\%                & 0.877                    \\
-            TSELM-L-Hybrid    & G       & Hybrid                      & 468M                        & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                 \\
-            TSELM-S-NoConcat           & G       & Discrete                    & 354M                        & 3.47    & 4.03    & 3.19   & 69.6\%                & 0.868\_d                 \\
-            \hline
-            TSELM-S           & G       & Discrete                    & 354M                        & 3.50    & 4.07    & 3.24   & 28.1\%                & 0.892\_d                 \\
-            TSELM-M          & G        & Discrete                    & 389M                        & 3.49    & 4.05    & 3.22   & 28.4\%                & 0.901\_d                 \\
-            TSELM-L         & G         & Discrete                    & 468M                        & 3.49    & 4.05    & 3.22   & 27.1\%                & 0.905\_d \\
-            \Xhline{2\arrayrulewidth} % Bold top line              
-            \end{tabular}
-            \linebreak
-            \label{main_exp}
-      \end{center}
-    %   \vspace{-10pt}
-  \end{table*}
-
   % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table*}
@@ -158,10 +124,10 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
                           & \multicolumn{1}{l}{}                                                    & \multicolumn{1}{l}{}                            & SIG         & BAK        & OVL        &                   &        &             & SIG         & BAK        & OVL        &                   &                    \\ \hline
   Mixture                 & -                                             & -                                                                                           & 3.39        & 3.14       & 2.68       & 79.3            & -        &           & 3.39        & 3.14       & 2.68       & 79.3            & -                  \\
   Target-Discrete         & G                                             & -                                                                                          & 3.57        & 4.10       & 3.32       & 11.3            & 0.653     &          & 3.57        & 4.10       & 3.32       & 11.3            & 0.653               \\ \hline
-  Spex+                   & D                                             & C                                                                                  & 3.36        & 3.76       & 2.98       & 19.3            & 0.923     &          & 3.36        & 3.76       & 2.98       & 19.3            & 0.923             \\ \hline
-  Contin-WavLM-L6     & G                                             & C                                                                                  & 3.56        & 4.06       & 3.27       & 14.7            & 0.877     &          & 3.56        & 4.06       & 3.27       & 14.7            & 0.877             \\
+  Spex+                   & D                                             & -                                                                                  & 3.36        & 3.76       & 2.98       & 19.3            & 0.923     &          & 3.36        & 3.76       & 2.98       & 19.3            & 0.923             \\ \hline
+  Continuous-WavLM-L6     & G                                             & C                                                                                  & 3.56        & 4.06       & 3.27       & 14.7            & 0.877     &          & 3.56        & 4.06       & 3.27       & 14.7            & 0.877             \\
   TSELM-L-Hybrid          & G                                             & H                                                                                     & 3.50        & 4.06       & 3.22       & 19.8            & 0.924\_d  &          & 3.50        & 4.06       & 3.22       & 19.8            & 0.924\_d             \\
-  TSELM-S-NoConcat        & G                                             & D                                                                                   & 3.47        & 4.03       & 3.19       & 69.6            & 0.868\_d    &        & 3.47        & 4.03       & 3.19       & 69.6            & 0.868\_d         \\ \hline
+  TSELM-S-NoCat       & G                                             & D                                                                                   & 3.47        & 4.03       & 3.19       & 69.6            & 0.868\_d    &        & 3.47        & 4.03       & 3.19       & 69.6            & 0.868\_d         \\ \hline
   TSELM-S                 & G                                             & D                                                                                    & 3.50        & 4.07       & 3.24       & 28.1            & 0.892\_d      &      & 3.50        & 4.07       & 3.24       & 28.1            & 0.892\_d            \\
   TSELM-M                 & G                                             & D                                                                                   & 3.49        & 4.05       & 3.22       & 28.4            & 0.901\_d    &        & 3.49        & 4.05       & 3.22       & 28.4            & 0.901\_d             \\
   TSELM-L                 & G                                             & D                                                                                  & 3.49        & 4.05       & 3.22       & 27.1            & 0.905\_d    &        & 3.49        & 4.05       & 3.22       & 27.1            & 0.905\_d        \\
