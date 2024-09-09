@@ -279,7 +279,8 @@ This hypothesis is supported by the results of TSELM-L-Hybrid, where continuous 
 We observe a significant increase in dWER when the mixture audio is not concatenated with the reference, as seen in the TSELM-S-NoCat results in Table \ref{main_exp}. For WavLM to effectively perform target speaker separation, the input audio must follow specific conditions: the mixture should be less than 50\% of the total length, and the first utterance should be the target speaker. Under these conditions, WavLM outputs a slightly denoised embedding that emphasizes the target speaker. When the entire input is a mixture, however, we found that WavLM sometimes extracts the wrong speaker.
 Our current concatenation strategy is inspired by SELM's \cite{selm} success in speech denoising and aims to transform the target speaker extraction task into a more difficult speech enhancement problem leveraging WavLM's denoising capability. However, this is a suboptimal solution and we think future work should focus on developing a speaker-aware tokenization method. 
 
-In Table \ref{hubert_wavlm_6}, we compare the performance of HuBERT and WavLM as SSL model and examine the effects of using either one or multiple layers for discretization. Our findings indicate that using HuBERT as the SSL model results in better DNSMOS scores but much worse dWER compared to our WavLM baseline. The improved DNSMOS scores likely stem from the vocoder performance, yet they do not adequately reflect speech intelligibility, which is crucial for speech separation tasks. 
+In Table \ref{hubert_wavlm_6}, we compare the performance of HuBERT and WavLM as SSL model and examine the effects of using either one or multiple layers for discretization. Our findings indicate that using HuBERT as the SSL model results in better DNSMOS scores but much worse dWER compared to our WavLM baseline. The improved DNSMOS scores likely stem from the vocoder performance, yet they do not adequately reflect speech intelligibility, which is crucial for speech separation tasks. SkIM-UniCATS uses only DNSMOS as evaluation, which might not be enough 
+in terms of speech intelligibility and speaker similarity.
 The poorer dWER scores observed with HuBERT may be attributed to its training on clean speech, which might not equip it to capture the complexity and richness of mixed speech. Moreover, our results from WavLM-L6 suggest that when performing speech separation, discretizing across multiple layers provides better results than relying on a single layer.  This might be because that using multiple layer outputs can better tolerate errors compared to using just one layer output.
 
 Finally, we observe a performance gap between discrete methods and continuous methods, as demonstrated by Continuous-WavLM-L6.
@@ -288,7 +289,7 @@ It has a better dWER of 13.6\% compared with TSELM-L. The gap in performance may
 We hope future research will work to bridge this gap.   
 
 \section{Conclusion}
-In this work, we introduced a novel way using discrete tokens and language models for target speaker extraction.
+In this work, we introduce a novel way using discrete tokens and language models for target speaker extraction.
 Our method leverages multiple hidden layers of WavLM and Kmeans tokenizers for encoding, employs cross-attention and a language model for separation, and utilizes a scalable HiFi-GAN for audio reconstruction.
 Experiments have 
 shown that our model can achieve excellent performance in terms of speech quality, and comparable performance in terms of speech intelligibility and 
@@ -296,7 +297,7 @@ speaker similarity. However, we still have a gap between continuous methods espe
 this gap. 
 
 \section{Acknowledgment}
-We want to thank Super Computing Network (SCNet) for providing the computing resources. 
+We woudld like to thank Super Computing Network (SCNet) for providing the computing resources. 
 
 
 % \section*{Acknowledgment}
