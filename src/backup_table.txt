@@ -30,3 +30,25 @@
             \label{main_exp}
       \end{center}
   \end{table*}
+
+
+## table backup
+\begin{table*}[]
+  \setlength{\tabcolsep}{5pt} % Adjust column spacing
+  \begin{center}
+  \begin{tabular}{cccccccccccccccccc}
+  \multirow{3}{*}{System} & \multicolumn{1}{l}{\multirow{3}{*}{Category}} & \multicolumn{1}{l}{\multirow{3}{*}{Type}} & \multicolumn{1}{l}{\multirow{3}{*}{Size}} & \multicolumn{5}{c}{Libri2Mix}                                                  & \multicolumn{5}{c}{WSJO\_2mix}                                                 &  &  &  &  \\
+                          & \multicolumn{1}{l}{}                          & \multicolumn{1}{l}{}                            & \multicolumn{1}{l}{}                            & \multicolumn{3}{c}{DNSMOS $\uparrow$} & dWER $\downarrow$ & Spk Sim $\uparrow$ & \multicolumn{3}{c}{DNSMOS $\uparrow$} & dWER $\downarrow$ & Spk Sim $\uparrow$ &  &  &  &  \\ \cline{5-7}
+                          & \multicolumn{1}{l}{}                          & \multicolumn{1}{l}{}                            & \multicolumn{1}{l}{}                            & SIG         & BAK        & OVL        &                   &                    & SIG         & BAK        & OVL        &                   &                    &  &  &  &  \\ \cline{1-9}
+  Mixture                 & -                                             & -                                               & -                                               & 3.39        & 3.14       & 2.68       & 79.3            & -                  & 3.39        & 3.14       & 2.68       & 79.3            & -                  &  &  &  &  \\
+  Target-Discrete         & G                                             & -                                               & 330M                                            & 3.57        & 4.10       & 3.32       & 11.3            & 0.653              & 3.57        & 4.10       & 3.32       & 11.3            & 0.653              &  &  &  &  \\ \cline{1-9}
+  Spex+                   & D                                             & C                                      & 11M                                             & 3.36        & 3.76       & 2.98       & 19.3            & 0.923              & 3.36        & 3.76       & 2.98       & 19.3            & 0.923              &  &  &  &  \\ \cline{1-9}
+  Continuous-WavLM-L6     & G                                             & C                                      & 220M                                            & 3.56        & 4.06       & 3.27       & 14.7            & 0.877              & 3.56        & 4.06       & 3.27       & 14.7            & 0.877              &  &  &  &  \\
+  TSELM-L-Hybrid          & G                                             & H                                          & 468M                                            & 3.50        & 4.06       & 3.22       & 19.8            & 0.924\_d           & 3.50        & 4.06       & 3.22       & 19.8            & 0.924\_d           &  &  &  &  \\
+  TSELM-S-NoConcat        & G                                             & D                                        & 354M                                            & 3.47        & 4.03       & 3.19       & 69.6            & 0.868\_d           & 3.47        & 4.03       & 3.19       & 69.6            & 0.868\_d           &  &  &  &  \\ \cline{1-9}
+  TSELM-S                 & G                                             & D                                        & 354M                                            & 3.50        & 4.07       & 3.24       & 28.1            & 0.892\_d           & 3.50        & 4.07       & 3.24       & 28.1            & 0.892\_d           &  &  &  &  \\
+  TSELM-M                 & G                                             & D                                        & 389M                                            & 3.49        & 4.05       & 3.22       & 28.4            & 0.901\_d           & 3.49        & 4.05       & 3.22       & 28.4            & 0.901\_d           &  &  &  &  \\
+  TSELM-L                 & G                                             & D                                        & 468M                                            & 3.49        & 4.05       & 3.22       & 27.1            & 0.905\_d           & 3.49        & 4.05       & 3.22       & 27.1            & 0.905\_d           &  &  &  & 
+  \end{tabular}
+\end{center}
+  \end{table*}
