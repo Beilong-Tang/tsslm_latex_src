@@ -114,6 +114,11 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
 % \usepackage{multirow}
 \begin{table*}
   % \setlength{\tabcolsep}{5pt} % Adjust column spacing
+  \caption{The performance of different systems on Libri2Mix testset. For TSELM-L-Hybrid  
+  and TSELM, we compare the speaker similarity with the discretized target speech 
+  (Target-discrete-WavLM) instead of the target speech due to the observation that 
+  the process of discretization already losses the speaker information (0.653 for 
+  Target-discrete-WavLM). We use "\_d" to denote it. }
   \renewcommand{\arraystretch}{1.2}
   \begin{center}
   \begin{tabular}{cccccccccccccccccc}
@@ -137,7 +142,10 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
   \end{table*}
 
   \begin{table}
-    
+    \caption{Performance of different SSL models and layer selections. HuBERT model subsitutes the WavLM Large to HuBERT Large as the SSL model.
+            The WavLM-L6 uses only the 6th layer of hidden output of WavLM Large. WavLM denotes our TSELM model which uses 6 different output layers. 
+            }
+            \vspace{-20.5pt}
     \renewcommand{\arraystretch}{1.1}
     \begin{center}
         \begin{tabular}{ccccccc}
@@ -152,19 +160,15 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
             \multirow{2}{*}{WavLM-L6}                              &  Discrete                          & 2.08    & 2.07    & 1.64   & 122.1\%                & 0.589\_d                        \\
             &  Hybrid                          & 3.54    & 3.84    & 3.12   & 30.0\%                & 0.849\_d                        \\
             \hline
-            \hline
             \multirow{2}{*}{WavLM}                                     &  Discrete                          & 3.49    & 4.05    & 3.22   & 27.1\%                & 0.905\_d                        \\
                                               &  Hybrid                          & 3.50    & 4.06    & 3.22   & 19.8\%                & 0.924\_d                        \\
             
             \Xhline{2\arrayrulewidth} % Bold top line              
             \end{tabular}
             \linebreak
-            \caption{Performance of different SSL models and layer selections. HuBERT model subsitutes the WavLM Large to HuBERT Large as the SSL model.
-            The WavLM-L6 uses only the 6th layer of hidden output of WavLM Large. WavLM denotes our TSELM model which uses 6 different output layers. 
-            }
             \label{hubert_wavlm_6}
       \end{center}
-      \vspace{-32.5pt}
+      \vspace{-18.5pt}
     \end{table}
 
 
