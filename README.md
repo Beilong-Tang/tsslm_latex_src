@@ -9,6 +9,7 @@ TSSLM: Target Speaker Separation using Discrete Tokens and Language Models
 - [ ] Add explanation for how to use whisper base to model the transcript
 - [x] Table 2 add more explanation 
 - [ ] Github code finishes
+- [ ] check and ask if it is fine to captialize the title
 
 
 
