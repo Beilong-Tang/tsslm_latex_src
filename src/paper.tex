@@ -63,7 +63,7 @@ ming.li369@dukekunshan.edu.cn}
 \end{abstract}
 
 \begin{IEEEkeywords}
-target speaker extraction, speech separation, language models, audio discretization, Self-Supervised Models
+target speaker extraction, speech separation, language models, audio discretization, self-supervised models
 \end{IEEEkeywords}
 \begin{figure*}[t]
     \centering
@@ -92,8 +92,8 @@ models \cite{target_diff} and variational autoencoders (VAE) \cite{vae} have bee
 
 The modeling of discretization of audio has gained significant attention with the advancement of language models (LMs) in modeling texts \cite{l1, l2, l3, l4, l5}. Researchers are trying to convert audio into discrete tokens and leverage LMs to 
 model them, thereby simplifying audio generation tasks by transforming complex regression problems into classification tasks \cite{dasb}.
-LMs have demonstrated its scalability and unification of different modalities in audio synthesis tasks \cite{audio_gen,deshmukh2023pengi,chen2023lauragpt}. It has also achieved superior performances compared with discriminative models in
-tasks such as speech enhancement \cite{selm,mask_sr} and blind speech separation \cite{dasb,tokensplit}.
+LMs have demonstrated scalability and unification of different modalities in audio synthesis tasks \cite{audio_gen,deshmukh2023pengi,chen2023lauragpt}. It has also achieved superior performances compared with discriminative models in
+tasks such as speech enhancement \cite{selm,mask_sr} and blind speech separation \cite{tokensplit}.
 
 Some discretization methods \cite{selm,tokensplit,dasb} use Kmeans on the output of Self-Supervised Learning (SSL) models such as HuBERT \cite{hubert} and WavLM \cite{wavlm}. SSL models have demonstrated outstanding performances across numerous downstream tasks \cite{superb}, as they extract continuous representations rich in semantic and timbral information from speech.
 
@@ -113,7 +113,7 @@ Extensive experiments demonstrate that our method achieves excellent speech qual
 We use the pretrained self-supervised learning (SSL) model WavLM Large \cite{wavlm} to encode speech into continuous representations. Specifically, we extract the outputs from six hidden layers: 1, 3, 7, 12, 18, and 23. Given a speech signal \(s \in \mathbb{R}^{T'}\), the output of WavLM is a tensor \(\bm{r}\) with shape \(n \times T \times E\), where \(n\) is the number of output layers (6 in this case), \(T\) is the time dimension, and \(E\) represents the embedding dimension. For tokenization, we apply a separate Kmeans model to each output layer, with each model using the same number of clusters, denoted by \(K\). After tokenization, the continuous embedding \(\bm{r}\) is transformed into a discrete tensor \(\bm{d}\) with shape \(n \times T\), where each value \(\bm{d}_{i} \in (0, K-1) \). In all our experiments, we set \(K = 1000\). For both reference and mixed speech, the same Kmeans model and the same layer combination from WavLM Large are used. The encoder remains frozen during training.
 The encoding strategy for mixed speech is crucial to the performance of the model. Given a reference speech \(s_r \in \mathbb{R}^{T^r}\) and a mixed speech \(s_m \in \mathbb{R}^{T'}\), we follow the previously described procedure to encode the reference speech into a tensor \(\bm{d_r}\) of shape \(n \times T_r\). However, for the mixed speech, instead of applying the encoding directly, we first concatenate it with the reference speech, creating a signal \(s' = [s_r, s_m, s_r] \in \mathbb{R}^{(T^r + T' + T^r)}\). This concatenated signal is then input into the encoder, producing an output tensor \(\bm{d'}\) with shape \(n \times (T_r + T + T_r)\), where \(T\) represents the length for the mixed speech embedding. The tensor \(\bm{d'}\) contains discrete tokens for the two segments of reference speech and the mixed speech. We extract the portion \(\bm{d}\) corresponding to the mixed speech, resulting in an output tensor of shape \(n \times T\).
 
-This approach is inspired by WavLM \cite{wavlm}, which trains the model by overlapping clean speech with an interfering signal covering less than 50\% of the speech, using the first utterance as the primary speaker. This allows WavLM to focus on producing target speaker dependent embeddings. Our experiments demonstrated that this concatenation strategy significantly enhances the model's performance by guiding it to prioritize the target speaker's information.
+This approach is inspired by WavLM \cite{wavlm}, which trains the model by overlapping clean speech with an interfering signal covering less than 50\% of the speech, using the first utterance as the primary speaker. This allows WavLM to focus on producing target speaker dependent embeddings. Our experiments demonstrate that this concatenation strategy significantly enhances the model's performance by guiding it to prioritize the target speaker's information.
 \subsection{Modeling}
 
 \begin{table*}
@@ -182,7 +182,7 @@ respectively, each resulting in a tensor of shape \(T \times E\).
 After embedding, we follow the same recipe as in \cite{dasb} to 
 aggregate the tensor by using attention mechanism to sum all the 6 tensors. This summation 
 keeps the information of each layer while reducing the 
-dimension of layers. After attention embedding, we obtain reference embedding \(E_r\) and 
+dimension of layers and system complexity. After attention embedding, we obtain reference embedding \(E_r\) and 
 mixture embedding \(E_m\).
 
 \subsubsection{Cross Attention}
@@ -235,7 +235,7 @@ We use the clean testset of Libri2Mix\footnote{\href{https://github.com/JorisCos
 
 It is shown that metrics like PESQ, SI-SNR, STOI do not accurately reflect the speech quality of 
 vocoder outputs due to the fact that the vocoder output does not focus strictly on frame alignment
-\cite{tokensplit,selm}. We use DNSMOS \cite{dnsmos} to measure the speech quality, and the differential 
+\cite{tokensplit,selm}. Instead, we use DNSMOS \cite{dnsmos} to measure the speech quality, and the differential 
 Word Error 
 Rate (dWER) \cite{dwer} using the base model of Whisper \cite{whisper} to measure the speech intelligibility. For speaker similarity, we use the \texttt{ResNet221\_LM}
 from the public WeSpeaker \cite{wespeaker} to calculate the embedding cosine speaker similarity.
@@ -268,7 +268,7 @@ However, since discretization inherently results in some loss of speaker informa
 This target audio output from Target-Discrete serves as the upper bond for our model performance.
 The observed speaker information loss is likely due to the tokenization process, which inherently reduces speaker fidelity. Future work should aim to enhance tokenization methods for SSL models to mitigate this loss. Since the primary goal of this research is to explore target speaker extraction using discretized information rather than to develop improved tokenization methods, we argue that comparing the outputs of our model with discretized speech is a reasonable approach, as it represents an upper bound on performance.
 
-We observe that TSELM-l outperforms Spex+ in terms of DNSMOS scores, indicating better speech quality, but performs slightly worse in dWER, suggesting lower speech intelligibility. One potential reason for this could be the discretization process applied to the mixed speech. Our Kmeans algorithm is trained on clean speech rather than mixed speech, which is advantageous for speech enhancement as it likely aids in denoising. However, when applied to mixed speech, this discretization might lead to the model focusing on the wrong speaker, as it may only retain dominant speaker information, causing a reduction in intelligibility.
+We observe that TSELM-L outperforms Spex+ in terms of DNSMOS scores, indicating better speech quality, but performs slightly worse in dWER, suggesting lower speech intelligibility. One potential reason for this could be the discretization process applied to the mixed speech. Our Kmeans algorithm is trained on clean speech rather than mixed speech, which is advantageous for speech enhancement as it likely aids in denoising. However, when applied to mixed speech, this discretization might lead to the model focusing on the wrong speaker, as it may only retain dominant speaker information, causing a reduction in intelligibility.
 This hypothesis is supported by the results of TSELM-L-Hybrid, where continuous embeddings from the mixture speech were used without discretization, achieving dWER scores better than Spex+ on WSJ0-2mix. 
 % Another contributing factor could be the limitations of our current language model (LM). The encoder-only LM achieves around 55\% accuracy for token prediction on Libri2Mix testset, and we believe using more advanced models, such as auto-regressive or masking-based LMs, could lead to improved performance in future iterations.
 
@@ -276,7 +276,7 @@ We observe a significant increase in dWER when the mixture audio is not concaten
 Our current concatenation strategy, inspired by SELM's \cite{selm} success in speech denoising, reframes the target speaker extraction task as a more challenging speech enhancement problem, utilizing WavLM's denoising capabilities. However, this approach remains suboptimal, and we believe our future work should prioritize developing a speaker-aware tokenization method. 
 
 In Table \ref{hubert_wavlm_6}, we compare the performance of HuBERT and WavLM as SSL models and examine the effects of using either one or multiple layers for discretization. Our findings indicate that using HuBERT as the SSL model results in better DNSMOS scores but much worse dWER compared to our WavLM baseline. The improved DNSMOS scores likely stem from the vocoder performance, yet they do not adequately reflect speech intelligibility, which is crucial for speech separation tasks.
-The poorer dWER scores observed with HuBERT may be attributed to its training on clean speech, which might not equip it to capture the complexity and richness of mixed speech. Moreover, our results from WavLM-L6 suggest that when performing speech separation, discretizing across multiple layers provides better results than relying on a single layer.  This might be because that using multiple layer outputs can better tolerate errors compared to using just one layer output.
+The poorer dWER scores observed with this HuBERT model may be attributed to its training on clean speech, which might not equip it to capture the complexity and richness of mixed speech. Moreover, our results from WavLM-L6 suggest that when performing speech separation, discretizing across multiple layers provides better results than relying on a single layer.  This might be because that using multiple layer outputs can better tolerate errors compared to using just one layer output.
 
 Finally, we observe a performance gap between discrete methods and continuous methods, as demonstrated by Continuous-WavLM-L6.
 Continuous-WavLM-L6 has the best performance in terms of DNSMOS and dWER among all the experiments, and it only uses the 6 layer output of WavLM. 
