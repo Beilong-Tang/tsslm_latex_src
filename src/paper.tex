@@ -76,7 +76,7 @@ target speaker extraction, speech separation, language models, audio discretizat
     \begin{figure}
         \centering
         \includegraphics[width=0.25\textwidth]{assets/cross_attention.pdf}
-        \caption{Details of Cross Attention mechanism.}
+        \caption{Details of Cross-Attention mechanism.}
         \label{cross_attention}
         \vspace{-17pt}
         \end{figure}
@@ -186,9 +186,9 @@ dimension of layers and system complexity. After attention embedding, we obtain 
 mixture embedding \(E_m\).
 
 \subsubsection{Cross Attention}
-We apply cross attention module in \cite{usef_tes} to inject the reference embeddings into the mixture. The details 
+We apply cross-attention module in \cite{usef_tes} to inject the reference embeddings into the mixture. The details 
 are shown in Fig.\ref{cross_attention}.
-The cross attention module consists of a stack of cross-multiple head attention modules, followed by
+The cross-attention module consists of a stack of cross-multiple head attention modules, followed by
 a Feature-wise Linear Modulation (FiLM) module. 
 We use \(E_m\) as the query and \(E_r\) as the key and value for 
 the attention module. The output from the cross-multiple head attention module \(E_{spk}\)
@@ -250,7 +250,7 @@ Target-Discrete refers to the discretized target speech using our encoder and de
 It serves as the upper bond for our model performance.  Besides TSELM, we conduct three main experiments, named
  Continuous-WavLM-L6, TSELM-L-Hybrid and TSELM-S-NoCat using the same training data. 
 For Continuous-WavLM-6, we directly
-pass the embeddings from the 6th hidden layer output of WavLM Large to the cross attention  
+pass the embeddings from the 6th hidden layer output of WavLM Large to the cross- attention  
 and LM without discretization. 
 The concatenation strategy is still applied to the mixed speech. Mean Square Error (MSE) loss is applied between the output embeddings and the clean 
 embeddings. HiFi-GAN in \cite{knn_vc} is used for audio reconstruction. For 
