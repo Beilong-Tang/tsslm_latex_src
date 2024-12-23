@@ -76,7 +76,7 @@ tasks such as speech enhancement \cite{selm,mask_sr} and blind speech separation
 Some discretization methods \cite{selm,tokensplit,dasb} use Kmeans on the output of Self-Supervised Learning (SSL) models such as HuBERT \cite{hubert} and WavLM \cite{wavlm}. SSL models have demonstrated outstanding performances across numerous downstream tasks \cite{superb}, as they extract continuous representations rich in semantic and timbral information from speech. In addition, some works \cite{laura} use neural audio codec for discretization. However, their performances on Speech Separation are limited \cite{dasb}. 
 
 There are only few works about discretization in Target Speech Extraction (TSE). SkiM-UniCATS \cite{gen_tse} is among the first to use discrete tokens in TSE, leveraging SSL models like HuBERT and vq-wav2vec \cite{vq_wav2vec}. However, it overlooks the WavLM model, which excels in speech separation \cite{wavlm}. Also, it mainly focuses on single-layer outputs for discretization. Moreover, its evaluation is limited to speech quality, neglecting intelligibility and speaker similarity, both crucial for TSE. We try to address these potential issues by proposing TSELM, which uses multiple WavLM layers for discretization and adds metrics for intelligibility and speaker similarity. Our demos are available at 
-\footnote{\href{https://beilong-tang.github.io/TSELM.demo/}{https://beilong-tang.github.io/TSELM.demo/}}.
+\footnote{\href{https://tselmdemo.github.io/TSELM.demo/}{https://tselmdemo.github.io/TSELM.demo/}}.
 
 
 \section{Method}
@@ -234,7 +234,7 @@ pass the embeddings from the 6th hidden layer output of WavLM Large to the cross
 The concatenation strategy is still applied to the mixed speech. Mean Square Error loss is applied between the output embeddings and the clean 
 embeddings. HiFi-GAN in \cite{knn_vc} is used for audio reconstruction. For 
 TSELM-L-Hybrid, inspired by MaskSR \cite{mask_sr}, we discretize the reference 
-speech while utilizing the continuous embeddings from the mixed speech. In TSELM-S-NoCat, we utilize the TSELM-S model architecture but abandon the mixture concatenation strategy in the encoding step. The code and pretrained models are available at \footnote{\href{https://github.com/Beilong-Tang/TSELM}{https://github.com/Beilong-Tang/TSELM}}.
+speech while utilizing the continuous embeddings from the mixed speech. In TSELM-S-NoCat, we utilize the TSELM-S model architecture but abandon the mixture concatenation strategy in the encoding step. The code and pretrained models are available at \footnote{\href{https://github.com/tselmdemo/tselm}{https://github.com/tselmdemo/tselm}}.
 
 
 \section{Results and Discussions}
